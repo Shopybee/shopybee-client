@@ -8,16 +8,24 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 void main() {
-  runApp(const ShopyBeeApp());
+  // logger configuration
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    debugPrint(
+        '${record.loggerName} -> ${record.level.name}: ${record.message}');
+  });
+  runApp(ShopyBeeApp());
 }
 
 class ShopyBeeApp extends StatelessWidget {
-  const ShopyBeeApp({Key? key}) : super(key: key);
+  final Logger logger = Logger('ShopyBeeApp');
 
   @override
   Widget build(BuildContext context) {
+    logger.fine('ShopyBee App initialised successfully');
     return const MaterialApp(
       home: Scaffold(),
     );
