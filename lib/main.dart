@@ -7,16 +7,19 @@
 
 */
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-void main() {
+void main() async {
   // logger configuration
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     debugPrint(
         '${record.loggerName} -> ${record.level.name}: ${record.message}');
   });
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(ShopyBeeApp());
 }
 
