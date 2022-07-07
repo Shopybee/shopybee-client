@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:shopybee/view/Screens/welcomeScreen/welcome_screen.dart';
 
 void main() {
   // logger configuration
@@ -27,7 +28,8 @@ class ShopyBeeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.fine('ShopyBee App initialised successfully');
     return const MaterialApp(
-      home: Scaffold(),
+      debugShowCheckedModeBanner: false,
+      home: WelcomeScreen(),
     );
   }
 }
