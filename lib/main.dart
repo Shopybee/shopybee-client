@@ -10,7 +10,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:shopybee/view/Screens/welcomeScreen/welcome_screen.dart';
+import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
+import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
+import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 
 void main() async {
   // logger configuration
@@ -30,9 +32,13 @@ class ShopyBeeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     logger.fine('ShopyBee App initialised successfully');
-    return const MaterialApp(
+    return MaterialApp(
+      routes: {
+        '/login':(context) => LoginScreen(),
+        '/register':(context) => RegisterScreen()
+      },
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: AuthScreen(),
     );
   }
 }
