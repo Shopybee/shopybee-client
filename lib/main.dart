@@ -10,9 +10,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
+import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
+
+import 'controllers/register_screen_controller.dart';
 
 void main() async {
   // logger configuration
@@ -32,13 +36,21 @@ class ShopyBeeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     logger.fine('ShopyBee App initialised successfully');
-    return MaterialApp(
-      routes: {
-        '/login':(context) => LoginScreen(),
-        '/register':(context) => RegisterScreen()
-      },
-      debugShowCheckedModeBanner: false,
-      home: AuthScreen(),
+    return MultiProvider(
+      providers: [
+        // Screen controllers
+        ChangeNotifierProvider(create: (context) => LoginScreenController(),),
+        ChangeNotifierProvider(create: (context) => RegisterScreenController(),),
+        // Data controllers
+      ],
+      child: MaterialApp(
+        routes: {
+          '/login':(context) => LoginScreen(),
+          '/register':(context) => RegisterScreen()
+        },
+        debugShowCheckedModeBanner: false,
+        home: AuthScreen(),
+      ),
     );
   }
 }

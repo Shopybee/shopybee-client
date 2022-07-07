@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shopybee/constants/constants.dart';
 
 class AuthTextField extends StatelessWidget {
+  TextEditingController controller;
   String? label;
   String? hintText;
-  AuthTextField({this.label,this.hintText});
+  AuthTextField({this.label,this.hintText,required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,11 @@ class AuthTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label!,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-          SizedBox(height: 5,),
+          const SizedBox(height: 5,),
           TextFormField(
+            textAlign: TextAlign.start,
             decoration: InputDecoration(
+              alignLabelWithHint: true,
               hintText: hintText!,
               hintStyle: TextStyle(
                 color: mutedTextColor,
@@ -34,7 +37,7 @@ class AuthTextField extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(10)
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
             ),
           ),
         ],
