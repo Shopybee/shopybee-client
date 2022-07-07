@@ -9,12 +9,12 @@ class PrimaryButton extends StatelessWidget {
   double? fontSize;
   VoidCallback? callBack;
   PrimaryButton({Key? key,
-    required this.text, this.height, this.width,this.fontSize,this.callBack});
+    required this.text,required this.height,required this.width,this.fontSize,this.callBack});
   VoidCallback nothing = (){};
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width!,
       child: MaterialButton(
          onPressed: callBack??nothing,
           shape: RoundedRectangleBorder(

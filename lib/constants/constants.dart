@@ -8,6 +8,13 @@ const headBoldStyle = TextStyle(
     fontStyle: FontStyle.italic,
     color: primayColor);
 
+const authScreensTitleStyle = TextStyle(
+  fontSize: 26,
+  fontWeight: FontWeight.w500,
+);
 
 // constant colors
 const primayColor=Color(0xFFFFAC1C);
+Color mutedLineColor=Colors.grey.shade300;
+Color mutedTextColor=Colors.grey.shade600;
+final mutedTextStyle=TextStyle(color: mutedTextColor);
