@@ -46,6 +46,7 @@ class AuthScreen extends StatelessWidget {
               SizedBox(height: 20,),
               Center(
                 child: OutlinedNormalButton(
+                 callBack: () => Navigator.pushNamed(context, '/register'),
                     width: displayWidth(context) * 0.8, height: 45, text: 'Register',
                   fontSize: 16,
                 ),

@@ -7,17 +7,16 @@ class PrimaryButton extends StatelessWidget {
   double? height;
   double? width;
   double? fontSize;
+  VoidCallback? callBack;
   PrimaryButton({Key? key,
-    required this.text, this.height, this.width,this.fontSize}) : super(key: key);
-
+    required this.text, this.height, this.width,this.fontSize,this.callBack});
+  VoidCallback nothing = (){};
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       child: MaterialButton(
-         onPressed: () {
-
-         },
+         onPressed: callBack??nothing,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)
           ),

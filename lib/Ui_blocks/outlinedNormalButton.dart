@@ -5,26 +5,28 @@ class OutlinedNormalButton extends StatelessWidget {
   double? width;
   double? height;
   double? fontSize;
-  OutlinedNormalButton({Key? key, required this.text,
-  this.width,this.height,this.fontSize})
-      : super(key: key);
+  VoidCallback? callBack;
+  OutlinedNormalButton(
+      { required this.text, this.width, this.height, this.fontSize,this.callBack});
 
+  VoidCallback nothing = (){};
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width!,
       child: MaterialButton(
-        onPressed: (){},
+          onPressed: callBack??nothing,
           height: height!,
-          shape: RoundedRectangleBorder(side: BorderSide(
-            width: 1,
-          ),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 1,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           // padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           child: Text(
             text,
-            style: TextStyle(color: Colors.black,fontSize: fontSize),
+            style: TextStyle(color: Colors.black, fontSize: fontSize),
           )),
     );
   }
