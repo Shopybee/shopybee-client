@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:shopybee/Ui_blocks/outlinedNormalButton.dart';
 import 'package:shopybee/Ui_blocks/primaryButton.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class AuthScreen extends StatelessWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  final Logger logger= Logger('Auth Screen');
 
   @override
   Widget build(BuildContext context) {
+    logger.fine('AuthScreen builded successfully');
     return SafeArea(
       child: Scaffold(
         body:  Column(
@@ -41,6 +43,7 @@ class AuthScreen extends StatelessWidget {
                   height: 45,
                   text: 'Login',
                   fontSize: 16,
+                  callBack: () => Navigator.pushNamed(context, '/login'),
                 ),
               ),
               SizedBox(height: 20,),
