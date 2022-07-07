@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               CustomBackButton(),
               SizedBox(height: 20,),
-              Text('Register',style: authScreensTitleStyle,),
+              Text('Login',style: authScreensTitleStyle,),
               SizedBox(height: 20,),
               AuthTextField(label: 'Email',hintText: 'Enter your email'),
               SizedBox(height: 10,),
