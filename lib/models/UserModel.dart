@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
-  final String? title;
+  final String? name;
   final String? phone;
   final String? email;
   final String id;
 
   UserModel({
-    required this.title,
+    required this.name,
     required this.phone,
     required this.email,
     required this.id,
@@ -15,7 +15,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        title: json['title'],
+        name: json['name'],
         phone: json['phone'],
         email: json['email'],
         id: json['id']);

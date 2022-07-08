@@ -18,3 +18,8 @@ const primayColor=Color(0xFFFFAC1C);
 Color mutedLineColor=Colors.grey.shade300;
 Color mutedTextColor=Colors.grey.shade600;
 final mutedTextStyle=TextStyle(color: mutedTextColor);
+
+// api constants
+
+const baseUrl = 'https://shopybee-8115d-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
