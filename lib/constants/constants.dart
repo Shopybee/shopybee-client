@@ -6,7 +6,7 @@ const headBoldStyle = TextStyle(
     fontSize: 60,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.italic,
-    color: primayColor);
+    color: primaryColor);
 
 const authScreensTitleStyle = TextStyle(
   fontSize: 26,
@@ -14,7 +14,7 @@ const authScreensTitleStyle = TextStyle(
 );
 
 // constant colors
-const primayColor=Color(0xFFFFAC1C);
+const primaryColor=Color(0xFFFFAC1C);
 Color mutedLineColor=Colors.grey.shade300;
 Color mutedTextColor=Colors.grey.shade600;
 final mutedTextStyle=TextStyle(color: mutedTextColor);

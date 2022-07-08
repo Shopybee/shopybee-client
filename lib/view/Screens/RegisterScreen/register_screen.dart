@@ -97,6 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: MaterialButton(
                               onPressed: () async {
                                 final snackbar = ScaffoldMessenger.of(context);
+                                final navigator = Navigator.of(context);
                                 if (_formKey.currentState!.validate()) {
                                   logger.info('Registration form validated');
                                   logger
@@ -114,13 +115,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         SnackBar(content: Text(response!)));
                                   } else {
                                     logger.fine('Registration successfull');
+                                    navigator.pushReplacementNamed('/splash');
                                   }
                                 }
                               },
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               height: displayHeight(context) * 0.07,
-                              color: primayColor,
+                              color: primaryColor,
                               //padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                               child: const Text(
                                 'Register',

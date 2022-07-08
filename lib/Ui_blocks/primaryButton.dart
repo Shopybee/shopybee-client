@@ -21,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)
           ),
           height: height!,
-          color: primayColor,
+          color: primaryColor,
           //padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           child: Text(
             text,
