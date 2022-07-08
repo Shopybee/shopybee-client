@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
+import 'package:shopybee/providers/user_provider.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
@@ -39,14 +40,21 @@ class ShopyBeeApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // Screen controllers
-        ChangeNotifierProvider(create: (context) => LoginScreenController(),),
-        ChangeNotifierProvider(create: (context) => RegisterScreenController(),),
+        ChangeNotifierProvider(
+          create: (context) => LoginScreenController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterScreenController(),
+        ),
         // Data controllers
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
       ],
       child: MaterialApp(
         routes: {
-          '/login':(context) => LoginScreen(),
-          '/register':(context) => RegisterScreen()
+          '/login': (context) => LoginScreen(),
+          '/register': (context) => RegisterScreen()
         },
         debugShowCheckedModeBanner: false,
         home: AuthScreen(),

@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:shopybee/providers/user_provider.dart';
 
 class Authservice {
-
   final FirebaseAuth _auth;
 
   Authservice(this._auth);
@@ -32,17 +31,19 @@ class Authservice {
 
   Future<String?> signUp(
       {required String email,
-        required String password,
-        required BuildContext context}) async {
+      required String password,
+        required String name,
+      required BuildContext context}) async {
     try {
       String? returnResponse;
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
-
         dynamic response =
-        await Provider.of<UserProvider>(context, listen: false).registerNewUser(id: value.user!.uid,email: email,name: null);
-        if (response.statusCode == '200') {
+            await Provider.of<UserProvider>(context, listen: false)
+                .registerNewUser(id: value.user!.uid, email: email, name: name);
+
+        if (response.statusCode.toString() == '200') {
           returnResponse = 'valid';
         } else {
           returnResponse = response.toString();

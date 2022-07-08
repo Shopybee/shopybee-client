@@ -4,7 +4,8 @@ import 'package:shopybee/constants/constants.dart';
 class AuthPasswordField extends StatefulWidget {
   String? label;
   String? hintText;
-  AuthPasswordField({this.label, this.hintText});
+  TextEditingController controller;
+  AuthPasswordField({this.label, this.hintText, required this.controller});
 
   @override
   State<AuthPasswordField> createState() => _AuthPasswordFieldState();
@@ -28,8 +29,9 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
             height: 5,
           ),
           TextFormField(
+            controller: widget.controller,
             validator: (value) {
-              if(value!.isEmpty){
+              if (value!.isEmpty) {
                 return 'Cannot be empty';
               }
               return null;
@@ -46,8 +48,8 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
                     });
                   },
                   icon: visible
-                      ? const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off)),
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility)),
               hintText: widget.hintText!,
               hintStyle: TextStyle(
                 color: mutedTextColor,
