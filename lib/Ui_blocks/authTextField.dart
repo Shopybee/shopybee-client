@@ -16,8 +16,17 @@ class AuthTextField extends StatelessWidget {
           Text(label!,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
           const SizedBox(height: 5,),
           TextFormField(
+            validator: (value) {
+              if(value!.isEmpty){
+                return 'Cannot be empty';
+              }
+              return null;
+            },
             textAlign: TextAlign.start,
             decoration: InputDecoration(
+              errorStyle: const TextStyle(color: Colors.redAccent),
+              errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent)),
               alignLabelWithHint: true,
               hintText: hintText!,
               hintStyle: TextStyle(

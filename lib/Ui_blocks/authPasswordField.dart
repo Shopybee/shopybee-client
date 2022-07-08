@@ -28,8 +28,17 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
             height: 5,
           ),
           TextFormField(
+            validator: (value) {
+              if(value!.isEmpty){
+                return 'Cannot be empty';
+              }
+              return null;
+            },
             obscureText: visible ? false : true,
             decoration: InputDecoration(
+              errorStyle: const TextStyle(color: Colors.redAccent),
+              errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent)),
               suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
