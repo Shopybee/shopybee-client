@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shopybee/view/Screens/CartScreen/cart_screen.dart';
+import 'package:shopybee/view/Screens/HomeScreen/home_screen.dart';
+import 'package:shopybee/view/Screens/ProfileScreen/profile_screen.dart';
+
+// constant screens
+
+const List<dynamic> screens = [
+  HomeScreen(),
+  CartScreen(),
+  ProfileScreen(),
+];
 
 // constant Textstyles
 
@@ -14,12 +25,13 @@ const authScreensTitleStyle = TextStyle(
 );
 
 // constant colors
-const primaryColor=Color(0xFFFFAC1C);
-Color mutedLineColor=Colors.grey.shade300;
-Color mutedTextColor=Colors.grey.shade600;
-final mutedTextStyle=TextStyle(color: mutedTextColor);
+const primaryColor = Color(0xFFFFAC1C);
+const primaryBackgroundColor = Colors.white;
+Color mutedLineColor = Colors.grey.shade300;
+Color mutedTextColor = Colors.grey.shade600;
+final mutedTextStyle = TextStyle(color: mutedTextColor);
 
 // api constants
 
-const baseUrl = 'https://shopybee-8115d-default-rtdb.asia-southeast1.firebasedatabase.app/';
-
+const baseUrl =
+    'https://shopybee-8115d-default-rtdb.asia-southeast1.firebasedatabase.app/';

@@ -16,12 +16,13 @@ import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/providers/firebase_user_provider.dart';
 import 'package:shopybee/providers/user_provider.dart';
 import 'package:shopybee/services/firebase/auth_services.dart';
+import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
-import 'package:shopybee/view/Screens/HomeScreen/home_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 import 'package:shopybee/view/Screens/SplashScreen/splash_screen.dart';
 
+import 'controllers/app_screen_controller.dart';
 import 'controllers/register_screen_controller.dart';
 
 void main() async {
@@ -55,6 +56,7 @@ class ShopyBeeApp extends StatelessWidget {
           initialData: null,
         ),
         //******* Screen controllers ********//
+        ChangeNotifierProvider(create: (context) => AppScreenController(),),
         ChangeNotifierProvider(
           create: (context) => LoginScreenController(),
         ),
@@ -74,7 +76,7 @@ class ShopyBeeApp extends StatelessWidget {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
           '/splash' : (context) => SplashScreen(),
-          '/home':(context) => HomeScreen(),
+          '/app':(context) => AppScreen(),
 
         },
         debugShowCheckedModeBanner: false,

@@ -2,16 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/Ui_blocks/authPasswordField.dart';
-import 'package:shopybee/Ui_blocks/authTextField.dart';
-import 'package:shopybee/Ui_blocks/customBackButton.dart';
-import 'package:shopybee/Ui_blocks/primaryButton.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/dontHaveAccount.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/forgotPassword.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/loginWithOthersButton.dart';
+import 'package:shopybee/view/Ui_blocks/authPasswordField.dart';
+import 'package:shopybee/view/Ui_blocks/authTextField.dart';
+import 'package:shopybee/view/Ui_blocks/customBackButton.dart';
 
 import '../../../services/firebase/auth_services.dart';
 
