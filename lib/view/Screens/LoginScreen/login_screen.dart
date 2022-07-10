@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           snackbar
                               .showSnackBar(SnackBar(content: Text(response!)));
                         } else {
-                          navigator.pushReplacementNamed('/home');
+                          navigator.pushReplacementNamed('/splash');
                         }
                       }
                     },
@@ -118,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 50,
               ),
-              (loading) ? const Center(child: CircularProgressIndicator()) : const SizedBox(),
+              (loading)
+                  ? const Center(child: CircularProgressIndicator())
+                  : const SizedBox(),
             ],
           ),
         ),

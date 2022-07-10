@@ -20,7 +20,7 @@ class CustomNavBar extends StatelessWidget {
         showSelectedLabels: true,
         showUnselectedLabels: false,
         selectedLabelStyle: const TextStyle(
-          fontFamily: "mutka",
+          fontFamily: "Mukta",
         ),
         items: const [
           BottomNavigationBarItem(
