@@ -62,7 +62,9 @@ class AddressBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  logger.info('Edit button pressed');
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                     side: const BorderSide(color: Colors.grey)),
@@ -87,7 +89,9 @@ class AddressBox extends StatelessWidget {
                 ),
               ),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  logger.info('Delete button pressed');
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                     side: const BorderSide(color: Colors.grey)),
