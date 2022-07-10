@@ -88,3 +88,6 @@ flutter:
     - family: navbar
       fonts:
         - asset: assets/icons/Navbar.ttf
+    - family: appbar
+      fonts:
+        - asset: assets/icons/Appbar.ttf
