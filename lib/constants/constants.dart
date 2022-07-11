@@ -27,8 +27,8 @@ const authScreensTitleStyle = TextStyle(
 // constant colors
 const primaryColor = Color(0xFFFFAC1C);
 const primaryBackgroundColor = Colors.white;
-Color mutedLineColor = Colors.grey.shade300;
-Color mutedTextColor = Colors.grey.shade600;
+Color mutedLineColor = Colors.grey.shade200;
+Color mutedTextColor = Colors.grey.shade500;
 final mutedTextStyle = TextStyle(color: mutedTextColor);
 
 // api constants

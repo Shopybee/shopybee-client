@@ -23,6 +23,7 @@ class AddressBookModalSheet extends StatelessWidget {
               TextButton.icon(
                   onPressed: () {
                     logger.info('Clicked on Add new address button');
+                    Navigator.pushNamed(context, '/addAddress');
                   },
                   icon: const Icon(
                     Icons.add,
