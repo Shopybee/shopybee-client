@@ -16,6 +16,7 @@ import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/providers/firebase_user_provider.dart';
 import 'package:shopybee/providers/user_provider.dart';
 import 'package:shopybee/services/firebase/auth_services.dart';
+import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
@@ -77,7 +78,7 @@ class ShopyBeeApp extends StatelessWidget {
           '/register': (context) => RegisterScreen(),
           '/splash' : (context) => SplashScreen(),
           '/app':(context) => AppScreen(),
-
+          '/addAddress' : (context) => AddAddressScreen()
         },
         debugShowCheckedModeBanner: false,
         home: Consumer<AuthNotifier>(
