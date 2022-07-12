@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class AddressBox extends StatelessWidget {
-  final Logger logger = Logger('AddressBox');
+  final AddressModel addressModel;
+  AddressBox({required this.addressModel});
+  final Logger _logger = Logger('AddressBox');
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
-      height: displayHeight(context) * 0.25,
       width: displayWidth(context),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -31,7 +33,7 @@ class AddressBox extends StatelessWidget {
           SizedBox(
               width: displayWidth(context) * 0.6,
               child: Text(
-                'Near Kerala Public School, Chhota Gamharia'.toUpperCase(),
+                '${addressModel.addressLine}',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               )),
@@ -40,7 +42,7 @@ class AddressBox extends StatelessWidget {
           ),
           // City + State + Pincode
           Text(
-            'Jamshedpur, Jharkhand 832108'.toUpperCase(),
+            '${addressModel.city}, ${addressModel.state} ${addressModel.pincode}',
           ),
           const SizedBox(
             height: 2,
@@ -52,8 +54,8 @@ class AddressBox extends StatelessWidget {
           const SizedBox(
             height: 2,
           ),
-          const Text(
-            'Phone number: 8210523693',
+          Text(
+            'Phone number: ${addressModel.phone}',
           ),
           const SizedBox(
             height: 6,
@@ -63,7 +65,7 @@ class AddressBox extends StatelessWidget {
             children: [
               MaterialButton(
                 onPressed: () {
-                  logger.info('Edit button pressed');
+                  _logger.info('Edit button pressed');
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -90,7 +92,7 @@ class AddressBox extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () {
-                  logger.info('Delete button pressed');
+                  _logger.info('Delete button pressed');
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),

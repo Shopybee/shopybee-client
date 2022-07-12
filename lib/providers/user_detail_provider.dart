@@ -19,7 +19,7 @@ class UserDetailProvider extends ChangeNotifier {
 
   // getters
 
-  List<AddressModel> getAddresses({required String id}) {
+  List<AddressModel> getAddresses() {
     return [...addresses];
   }
 
