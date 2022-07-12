@@ -25,9 +25,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   TextEditingController passwordController = TextEditingController();
 
+  TextEditingController phoneController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   final Authservice _auth = Authservice(FirebaseAuth.instance);
+
+  final space = const SizedBox(height: 10);
 
   @override
   void dispose() {
@@ -73,16 +77,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             label: 'Name',
                             hintText: 'Enter your name',
                             controller: titleController),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        space,
+                        AuthTextField(
+                            label: 'Phone number',
+                            hintText: 'Enter your phone number',
+                            controller: phoneController),
+                        space,
                         AuthTextField(
                             label: 'Email',
                             hintText: 'Enter your email',
                             controller: emailController),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        space,
                         AuthPasswordField(
                           controller: passwordController,
                           label: 'Password',
@@ -105,6 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                   controller.startLoading();
                                   final String? response = await _auth.signUp(
+                                      phone: phoneController.text,
                                       name: titleController.text,
                                       email: emailController.text,
                                       password: passwordController.text,
@@ -134,9 +140,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                         ),
                         const AlreadyHaveAccount(),
-                        const SizedBox(
-                          height: 10,
-                        ),
                       ],
                     ),
                   ),

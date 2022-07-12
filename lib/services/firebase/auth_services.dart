@@ -33,6 +33,7 @@ class Authservice {
       {required String email,
       required String password,
         required String name,
+        required String phone,
       required BuildContext context}) async {
     try {
       String? returnResponse;
@@ -41,7 +42,7 @@ class Authservice {
           .then((value) async {
         dynamic response =
             await Provider.of<UserDetailProvider>(context, listen: false)
-                .registerNewUser(id: value.user!.uid, email: email, name: name);
+                .registerNewUser(id: value.user!.uid, email: email, name: name,phone: phone);
 
         if (response.statusCode.toString() == '200') {
           returnResponse = 'valid';

@@ -91,14 +91,15 @@ class UserDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  registerNewUser({required String id, String? name, String? email}) async {
+  registerNewUser({required String id, required String name, required String email,required String phone}) async {
     try {
       final response = await _putService.put(
           endUrl: 'users/$id.json',
           data: {
-            'name': name ?? 'New User',
+            'name': name ,
             'email': email,
             'id': id,
+            'phone':phone,
           },
           showMessage: true,
           message: "Account created successfully");
