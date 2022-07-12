@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/models/UserModel.dart';
+import 'package:shopybee/services/api/get_service.dart';
 import 'package:shopybee/services/api/post_service.dart';
 import 'package:shopybee/services/api/put_service.dart';
 import 'package:shopybee/services/api/update_service.dart';
@@ -12,6 +13,7 @@ class UserDetailProvider extends ChangeNotifier {
   final PutService _putService = PutService();
   final PostService _postService = PostService();
   final UpdateService _updateService = UpdateService();
+  final GetService _getService = GetService();
   UserModel? user;
   List<AddressModel> addresses = [];
 
@@ -22,6 +24,41 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   // setters
+
+  setUser(String uid) async {
+    try {
+      dynamic response = await _getService.get(endUrl: 'users/$uid.json');
+      if (response != null) {
+        Map<String, dynamic> responseBody = getResponseBody(response);
+        user = UserModel.fromJson(responseBody);
+        logger.fine('User set to ${user!.name}');
+      }
+    } catch (error) {
+      logger.severe(error.toString());
+    }
+
+    notifyListeners();
+  }
+
+  setAdderesses() async {
+    List<AddressModel> temp = [];
+    try {
+      dynamic response =
+          await _getService.get(endUrl: 'addresses/${user!.id}.json');
+      if (response != null) {
+        Map<String, dynamic> responseBody = getResponseBody(response);
+        responseBody.forEach((key, value) {
+          temp.add(AddressModel.fromJson(value));
+        });
+        addresses = temp;
+        logger.fine('Addresses set : ${addresses.length}');
+      }
+    } catch (error) {
+      logger.severe(error.toString());
+    }
+
+    notifyListeners();
+  }
 
   createNewAddress(String userId, AddressModel addressModel) async {
     try {

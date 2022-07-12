@@ -1,7 +1,7 @@
 /*
 
   Project Name : Shopybee
-  Project Authors : Subhojeet Sahoo and Gurudev Singh
+  Project Authors : { Subhojeet Sahoo, Gurudev Singh , Vishal Mahato }
   Creation Date : 6th July, 2022
   Project Aim : Building fullstack E-commerce application for learning purpose.
 
