@@ -6,10 +6,12 @@ class AddressModel {
   final String addressLine;
   final String? landmark;
   final String phone;
+  final String name;
 
   AddressModel(
       {required this.city,
       required this.id,
+      required this.name,
       required this.phone,
       required this.state,
       required this.pincode,
@@ -18,18 +20,20 @@ class AddressModel {
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(
+      name: json['name'],
         city: json['city'],
         phone: json['phone'],
         id: json['id'],
         state: json['state'],
         pincode: json['pincode'],
         addressLine: json['addressLine'],
-        landmark: json['landmark']);
+        landmark: json['landmark']??'null');
   }
 
   Map<String, dynamic> toJson() {
     return {
       'city': city,
+      'name':name,
       'phone': phone,
       'id': id,
       'state': state,

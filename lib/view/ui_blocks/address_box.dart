@@ -21,9 +21,9 @@ class AddressBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Name of the person who will receive the delivery
-          const Text(
-            'Subhojeet Sahoo',
-            style: TextStyle(
+          Text(
+            addressModel.name,
+            style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(

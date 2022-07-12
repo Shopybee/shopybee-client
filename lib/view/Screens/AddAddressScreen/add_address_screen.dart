@@ -9,16 +9,43 @@ import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/components/address_textfield.dart';
 import 'package:shopybee/view/Ui_blocks/primaryButton.dart';
 
-class AddAddressScreen extends StatelessWidget {
+class AddAddressScreen extends StatefulWidget {
+  @override
+  State<AddAddressScreen> createState() => _AddAddressScreenState();
+}
+
+class _AddAddressScreenState extends State<AddAddressScreen> {
   TextEditingController addressLineController = TextEditingController();
+
   TextEditingController cityController = TextEditingController();
+
   TextEditingController stateController = TextEditingController();
+
   TextEditingController pincodeController = TextEditingController();
+
   TextEditingController landmarkController = TextEditingController();
+
   TextEditingController phoneNoController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+
   final String userId = FirebaseAuth.instance.currentUser!.uid;
+
   final _formKey = GlobalKey<FormState>();
+
   final Logger logger = Logger('AddAddressScreen');
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    addressLineController.dispose();
+    cityController.dispose();
+    stateController.dispose();
+    pincodeController.dispose();
+    phoneNoController.dispose();
+    landmarkController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +77,18 @@ class AddAddressScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      Image.asset('assets/images/address.png'),
+                      Image.asset(
+                        'assets/images/address.png',
+                        height: displayHeight(context) * 0.2,
+                        width: displayWidth(context),
+                      ),
                       const SizedBox(
-                        height: 30,
+                        height: 15,
+                      ),
+                      AddressTextfield(
+                        controller: nameController,
+                        label: "Name",
+                        hintText: "Enter name",
                       ),
                       AddressTextfield(
                         controller: addressLineController,
@@ -112,6 +148,7 @@ class AddAddressScreen extends StatelessWidget {
                       AddressModel(
                           city: cityController.text,
                           id: '',
+                          name: nameController.text,
                           phone: phoneNoController.text,
                           state: stateController.text,
                           pincode: pincodeController.text,

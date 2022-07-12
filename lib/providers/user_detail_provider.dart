@@ -76,6 +76,7 @@ class UserDetailProvider extends ChangeNotifier {
             message: "Address saved successfully");
         if (updateResponse.statusCode == 200) {
           addresses.add(AddressModel(
+              name: addressModel.name,
               city: addressModel.city,
               id: addressId,
               phone: addressModel.phone,
@@ -91,15 +92,19 @@ class UserDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  registerNewUser({required String id, required String name, required String email,required String phone}) async {
+  registerNewUser(
+      {required String id,
+      required String name,
+      required String email,
+      required String phone}) async {
     try {
       final response = await _putService.put(
           endUrl: 'users/$id.json',
           data: {
-            'name': name ,
+            'name': name,
             'email': email,
             'id': id,
-            'phone':phone,
+            'phone': phone,
           },
           showMessage: true,
           message: "Account created successfully");
