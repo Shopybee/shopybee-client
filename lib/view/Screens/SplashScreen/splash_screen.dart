@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
+import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,21 +13,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final String myUid = FirebaseAuth.instance.currentUser!.uid;
+  final String userId = FirebaseAuth.instance.currentUser!.uid;
   bool init = true;
 
   @override
   void initState() {
     super.initState();
-    navigate();
   }
 
-  navigate()async{
+  navigate() async {
     final navigator = Navigator.of(context);
-    await Future.delayed(const Duration(seconds: 1));
-    navigator.pushReplacementNamed('/app');
+    if (mounted) {
+      navigator.pushReplacementNamed('/app');
+    }
   }
 
+  @override
+  void didChangeDependencies() async {
+    final dataProvider =
+        Provider.of<UserDetailProvider>(context, listen: false);
+    if (init) {
+      await dataProvider.setUser(userId);
+      await dataProvider.setAdderesses();
+      init = false;
+      navigate();
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +67,6 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: displayHeight(context) * 0.1,
             ),
-
             SizedBox(
               height: displayHeight(context) * 0.1,
             ),

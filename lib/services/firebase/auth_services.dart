@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/providers/user_provider.dart';
+import 'package:shopybee/providers/user_detail_provider.dart';
 
 class Authservice {
   final FirebaseAuth _auth;
@@ -40,7 +40,7 @@ class Authservice {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
         dynamic response =
-            await Provider.of<UserProvider>(context, listen: false)
+            await Provider.of<UserDetailProvider>(context, listen: false)
                 .registerNewUser(id: value.user!.uid, email: email, name: name);
 
         if (response.statusCode.toString() == '200') {
