@@ -12,9 +12,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:shopybee/controllers/add_address_screen_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/providers/firebase_user_provider.dart';
-import 'package:shopybee/providers/user_provider.dart';
+import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
@@ -57,28 +58,33 @@ class ShopyBeeApp extends StatelessWidget {
           initialData: null,
         ),
         //******* Screen controllers ********//
-        ChangeNotifierProvider(create: (context) => AppScreenController(),),
+        ChangeNotifierProvider(
+          create: (context) => AppScreenController(),
+        ),
         ChangeNotifierProvider(
           create: (context) => LoginScreenController(),
         ),
         ChangeNotifierProvider(
           create: (context) => RegisterScreenController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AddAddressScreenController(),
+        ),
 
         //****** Data controllers *******//
 
         ChangeNotifierProvider(
-          create: (context) => UserProvider(),
+          create: (context) => UserDetailProvider(),
         ),
       ],
       child: MaterialApp(
         routes: {
-          '/auth':(context) => AuthScreen(),
+          '/auth': (context) => AuthScreen(),
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
-          '/splash' : (context) => SplashScreen(),
-          '/app':(context) => AppScreen(),
-          '/addAddress' : (context) => AddAddressScreen()
+          '/splash': (context) => SplashScreen(),
+          '/app': (context) => AppScreen(),
+          '/addAddress': (context) => AddAddressScreen()
         },
         debugShowCheckedModeBanner: false,
         home: Consumer<AuthNotifier>(

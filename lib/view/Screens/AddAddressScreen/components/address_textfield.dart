@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/constants.dart';
-
 class AddressTextfield extends StatelessWidget {
   TextEditingController? controller;
   String? label;
@@ -17,8 +15,6 @@ class AddressTextfield extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
-            maxLines: 10,
-            minLines: 1,
             controller: controller!,
             validator: (value) {
               if (value!.isEmpty) {

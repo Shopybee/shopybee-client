@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
@@ -9,8 +7,8 @@ import 'package:shopybee/services/api/put_service.dart';
 import 'package:shopybee/services/api/update_service.dart';
 import 'package:shopybee/uitls/custom_methods.dart';
 
-class UserProvider extends ChangeNotifier {
-  final Logger logger = Logger('UserProvider');
+class UserDetailProvider extends ChangeNotifier {
+  final Logger logger = Logger('UserDetailProvider');
   final PutService _putService = PutService();
   final PostService _postService = PostService();
   final UpdateService _updateService = UpdateService();
@@ -27,22 +25,33 @@ class UserProvider extends ChangeNotifier {
 
   createNewAddress(String userId, AddressModel addressModel) async {
     try {
-      final response = await _postService.post(
+      final postResponse = await _postService.post(
           endUrl: 'addresses/$userId.json',
           data: addressModel.toJson(),
           showMessage: false);
-      if (response != null) {
-        Map<String, dynamic> responseBody = getResponseBody(response);
+      if (postResponse != null) {
+        Map<String, dynamic> responseBody = getResponseBody(postResponse);
         final String addressId = responseBody['name'];
-        await _updateService.update(
+        final updateResponse = await _updateService.update(
             endUrl: 'addresses/$userId/$addressId.json',
             data: {'id': addressId},
             showMessage: true,
             message: "Address saved successfully");
+        if (updateResponse.statusCode == 200) {
+          addresses.add(AddressModel(
+              city: addressModel.city,
+              id: addressId,
+              phone: addressModel.phone,
+              state: addressModel.state,
+              pincode: addressModel.pincode,
+              addressLine: addressModel.addressLine,
+              landmark: addressModel.landmark));
+        }
       }
     } catch (error) {
       logger.severe(error.toString());
     }
+    notifyListeners();
   }
 
   registerNewUser({required String id, String? name, String? email}) async {
