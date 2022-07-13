@@ -77,17 +77,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         AuthTextField(
                             label: 'Name',
                             hintText: 'Enter your name',
-                            controller: titleController),
+                            controller: titleController,
+                          validator: (value){
+                              if(value!.isEmpty)
+                                return "cannot be empty";
+                              else
+                                return null;
+                          },
+                        ),
                         space,
                         AuthTextField(
                             label: 'Phone number',
+                            prefix: Text('+91 '),
                             hintText: 'Enter your phone number',
-                            controller: phoneController),
+                            controller: phoneController,
+                          validator: (value){
+                            String pattern =
+                            r'(^(?:[+0]9)?[0-9]{10}$)';
+                            RegExp regex = new RegExp(pattern);
+                            if (!regex.hasMatch(value!))
+                              return 'Enter valid phone number';
+                            else
+                              return null;
+                          },
+                        ),
                         space,
                         AuthTextField(
                             label: 'Email',
                             hintText: 'Enter your email',
-                            controller: emailController),
+                            controller: emailController,
+                          validator: (value){
+                            bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$').hasMatch(value!);
+                            if(!emailValid)
+                              return 'Enter valid email';
+                            else
+                              null;
+                          },
+                        ),
                         space,
                         AuthPasswordField(
                           controller: passwordController,
