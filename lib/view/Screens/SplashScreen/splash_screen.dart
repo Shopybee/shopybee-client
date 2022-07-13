@@ -22,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigate() async {
-    final navigator = Navigator.of(context);
     if (mounted) {
+      final navigator = Navigator.of(context);
       navigator.pushReplacementNamed('/app');
     }
   }

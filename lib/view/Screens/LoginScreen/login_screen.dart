@@ -7,11 +7,9 @@ import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/dontHaveAccount.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/forgotPassword.dart';
-import 'package:shopybee/view/Screens/LoginScreen/components/loginWithOthersButton.dart';
 import 'package:shopybee/view/Ui_blocks/authPasswordField.dart';
 import 'package:shopybee/view/Ui_blocks/authTextField.dart';
-import 'package:shopybee/view/Ui_blocks/customBackButton.dart';
-
+import 'package:shopybee/view/ui_blocks/customBackButton.dart';
 import '../../../services/firebase/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -53,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomBackButton(),
+              CustomBackButton(route: '/auth'),
               const SizedBox(
                 height: 20,
               ),
