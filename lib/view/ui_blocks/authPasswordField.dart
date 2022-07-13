@@ -34,6 +34,9 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
               if (value!.isEmpty) {
                 return 'Cannot be empty';
               }
+              else if(value.length<6){
+                  return 'password length should be atleast 6';
+                }
               return null;
             },
             obscureText: visible ? false : true,
@@ -66,6 +69,8 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
                     color: mutedLineColor,
                   ),
                   borderRadius: BorderRadius.circular(10)),
+              focusedErrorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent)),
               contentPadding: EdgeInsets.symmetric(horizontal: 12),
             ),
           ),
