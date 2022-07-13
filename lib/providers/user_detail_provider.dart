@@ -47,16 +47,17 @@ class UserDetailProvider extends ChangeNotifier {
           await _getService.get(endUrl: 'addresses/${user!.id}.json');
       if (response != null) {
         Map<String, dynamic> responseBody = getResponseBody(response);
-        responseBody.forEach((key, value) {
-          temp.add(AddressModel.fromJson(value));
-        });
-        addresses = temp;
-        logger.fine('Addresses set : ${addresses.length}');
+        if (responseBody.isNotEmpty) {
+          responseBody.forEach((key, value) {
+            temp.add(AddressModel.fromJson(value));
+          });
+          addresses = temp;
+        }
       }
     } catch (error) {
       logger.severe(error.toString());
     }
-
+    logger.fine('Addresses set : ${addresses.length}');
     notifyListeners();
   }
 
