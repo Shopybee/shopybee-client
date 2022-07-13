@@ -26,7 +26,7 @@ class AuthScreen extends StatelessWidget {
               child: Text('Welcome to',
                   style: TextStyle(
                       fontSize: 40,
-                      fontFamily: 'mukta',
+                      fontFamily: 'Mukta',
                       fontWeight: FontWeight.w500)),
             ),
             const Padding(
@@ -42,15 +42,15 @@ class AuthScreen extends StatelessWidget {
                 height: 45,
                 text: 'Login',
                 fontSize: 16,
-                callBack: () => Navigator.pushNamed(context, '/login'),
+                callBack: () =>
+                    Navigator.pushReplacementNamed(context, '/login'),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Center(
               child: OutlinedNormalButton(
-                callBack: () => Navigator.pushNamed(context, '/register'),
+                callBack: () =>
+                    Navigator.pushReplacementNamed(context, '/register'),
                 width: displayWidth(context) * 0.8,
                 height: 45,
                 text: 'Register',

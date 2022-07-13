@@ -9,7 +9,6 @@ import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/register_screen_controller.dart';
 import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/uitls/device_size.dart';
-import 'package:shopybee/view/Screens/RegisterScreen/components/alreadyHaveAccount.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -36,6 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void dispose() {
     titleController.dispose();
+    phoneController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -45,7 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     logger.fine('Register Screen build successfully');
     final controllerL = Provider.of<RegisterScreenController>(context);
-    final controller = Provider.of<RegisterScreenController>(context);
+    final controller =
+        Provider.of<RegisterScreenController>(context, listen: false);
     final bool loading = controllerL.getLoading;
 
     return SafeArea(
@@ -62,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomBackButton(),
+                        CustomBackButton(route: '/auth'),
                         const SizedBox(
                           height: 20,
                         ),
@@ -139,7 +140,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const AlreadyHaveAccount(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Already have an account ? "),
+                            InkWell(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, '/login'),
+                              child: Text(
+                                'Login',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),

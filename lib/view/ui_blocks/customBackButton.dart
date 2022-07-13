@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({Key? key}) : super(key: key);
+  final String route;
+  CustomBackButton({required this.route});
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(onPressed: ()=> Navigator.pop(context)
-        , icon: const Icon(Icons.arrow_back_ios));
+    return IconButton(
+        onPressed: () => Navigator.pushReplacementNamed(context, route),
+        icon: const Icon(Icons.arrow_back_ios));
   }
 }
