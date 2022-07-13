@@ -5,7 +5,9 @@ class AuthTextField extends StatelessWidget {
   TextEditingController controller;
   String? label;
   String? hintText;
-  AuthTextField({this.label, this.hintText,required this.controller});
+  Widget? prefix;
+  String? Function(String?)? validator;
+  AuthTextField({this.label, this.hintText,required this.controller,this.validator,this.prefix});
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +25,14 @@ class AuthTextField extends StatelessWidget {
           ),
           TextFormField(
             controller: controller,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Cannot be empty';
-              }
-              return null;
-            },
+            validator: validator,
             textAlign: TextAlign.start,
             decoration: InputDecoration(
+              prefix: prefix,
               errorStyle: const TextStyle(color: Colors.redAccent),
-              errorBorder: const OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.redAccent)),
+              focusedErrorBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.redAccent)),
               alignLabelWithHint: true,
               hintText: hintText!,
