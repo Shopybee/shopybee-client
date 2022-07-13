@@ -13,8 +13,8 @@ class AppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<AppScreenController>(context);
-    final controllerL = Provider.of<AppScreenController>(context, listen: false);
+    final controllerL = Provider.of<AppScreenController>(context);
+    final controller = Provider.of<AppScreenController>(context, listen: false);
 
     return SafeArea(
         child: Scaffold(
