@@ -80,6 +80,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: PTSerif
+      fonts:
+        - asset: assets/fonts/PTSerif.ttf
     - family: Mukta
       fonts:
         - asset: assets/fonts/Mukta/Mukta-Medium.ttf
@@ -91,3 +94,6 @@ flutter:
     - family: appbar
       fonts:
         - asset: assets/icons/Appbar.ttf
+    - family: account_overview
+      fonts:
+        - asset: assets/icons/Account_overview.ttf
