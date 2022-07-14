@@ -63,7 +63,7 @@ class AccountOverViewBox extends StatelessWidget {
               color: Colors.blue[600],
             ),
             callback: () {
-              logger.fine('Address');
+              Navigator.pushNamed(context, '/address');
             },
             label: "My Addresses"),
         overviewCard(
