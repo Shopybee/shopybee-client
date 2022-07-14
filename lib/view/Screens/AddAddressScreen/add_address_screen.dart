@@ -49,14 +49,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controllerL = Provider.of<AddAddressScreenController>(context);
-    final controller =
-        Provider.of<AddAddressScreenController>(context, listen: false);
+    final controller = Provider.of<AddAddressScreenController>(context);
+
     final dataProvider =
         Provider.of<UserDetailProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
-        child: (controllerL.getLoading)
+        child: (controller.getLoading)
             ? const Center(
                 child: CircularProgressIndicator(),
               )

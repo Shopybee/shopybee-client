@@ -44,14 +44,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     logger.fine('Register Screen build successfully');
-    final controllerL = Provider.of<RegisterScreenController>(context);
-    final controller =
-        Provider.of<RegisterScreenController>(context, listen: false);
-    final bool loading = controllerL.getLoading;
+    final controller = Provider.of<RegisterScreenController>(context);
 
     return SafeArea(
       child: Scaffold(
-          body: (loading) // if user is trying to create new account
+          body: (controller
+                  .getLoading) // if user is trying to create new account
               ? const Center(
                   child:
                       CircularProgressIndicator(), // will be changed to shimmer effect later
@@ -75,43 +73,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                         ),
                         AuthTextField(
-                            label: 'Name',
-                            hintText: 'Enter your name',
-                            controller: titleController,
-                          validator: (value){
-                              if(value!.isEmpty)
-                                return "cannot be empty";
-                              else
-                                return null;
+                          label: 'Name',
+                          hintText: 'Enter your name',
+                          controller: titleController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "cannot be empty";
+                            }
+
+                            return null;
                           },
                         ),
                         space,
                         AuthTextField(
-                            label: 'Phone number',
-                            prefix: Text('+91 '),
-                            hintText: 'Enter your phone number',
-                            controller: phoneController,
-                          validator: (value){
-                            String pattern =
-                            r'(^(?:[+0]9)?[0-9]{10}$)';
+                          label: 'Phone number',
+                          prefix: const Text('+91 '),
+                          hintText: 'Enter your phone number',
+                          controller: phoneController,
+                          validator: (value) {
+                            String pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
                             RegExp regex = new RegExp(pattern);
-                            if (!regex.hasMatch(value!))
+                            if (!regex.hasMatch(value!)) {
                               return 'Enter valid phone number';
-                            else
-                              return null;
+                            }
+
+                            return null;
                           },
                         ),
                         space,
                         AuthTextField(
-                            label: 'Email',
-                            hintText: 'Enter your email',
-                            controller: emailController,
-                          validator: (value){
-                            bool emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$').hasMatch(value!);
-                            if(!emailValid)
+                          label: 'Email',
+                          hintText: 'Enter your email',
+                          controller: emailController,
+                          validator: (value) {
+                            bool emailValid = RegExp(
+                                    r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                                .hasMatch(value!);
+                            if (!emailValid) {
                               return 'Enter valid email';
-                            else
-                              null;
+                            }
+                            return null;
                           },
                         ),
                         space,
@@ -169,11 +170,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already have an account ? "),
+                            const Text("Already have an account ? "),
                             InkWell(
                               onTap: () =>
                                   Navigator.pushNamed(context, '/login'),
-                              child: Text(
+                              child: const Text(
                                 'Login',
                                 style: TextStyle(color: Colors.blue),
                               ),

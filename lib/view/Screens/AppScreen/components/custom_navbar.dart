@@ -4,17 +4,16 @@ import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/app_screen_controller.dart';
 import 'package:shopybee/uitls/custom_icons/navbar_icons.dart';
 
-
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controllerL = Provider.of<AppScreenController>(context);
-    final controller = Provider.of<AppScreenController>(context, listen: false);
+    final controller = Provider.of<AppScreenController>(context);
+
     return BottomNavigationBar(
         backgroundColor: Colors.white,
-        currentIndex: controllerL.getIndex,
+        currentIndex: controller.getIndex,
         onTap: (index) => controller.changeIndex(index),
         elevation: 4,
         selectedItemColor: primaryColor,
