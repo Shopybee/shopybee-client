@@ -35,6 +35,7 @@ dependencies:
   cloud_firestore: ^3.1.10
   provider: ^6.0.3
   http: ^0.13.4
+  font_awesome_flutter: ^10.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -94,6 +95,3 @@ flutter:
     - family: appbar
       fonts:
         - asset: assets/icons/Appbar.ttf
-    - family: account_overview
-      fonts:
-        - asset: assets/icons/Account_overview.ttf

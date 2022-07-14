@@ -11,22 +11,18 @@
 ///      fonts:
 ///       - asset: fonts/ProfileCustomIcons.ttf
 ///
-///
+/// 
 ///
 import 'package:flutter/widgets.dart';
 
 class AccountOverViewIcons {
   AccountOverViewIcons._();
 
-  static const _kFontFam = 'AccountOverViewIcons';
+  static const _kFontFam = 'ProfileCustomIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData wishlist =
-      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData addresses =
-      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData orders =
-      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData shopcon =
-      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData wishlist = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData orders = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData address = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData shopcon = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
