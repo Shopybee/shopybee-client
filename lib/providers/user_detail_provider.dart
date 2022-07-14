@@ -14,6 +14,7 @@ class UserDetailProvider extends ChangeNotifier {
   final PostService _postService = PostService();
   final UpdateService _updateService = UpdateService();
   final GetService _getService = GetService();
+  int selectedAddressIndex = -1;
   UserModel? user;
   List<AddressModel> addresses = [];
 
@@ -58,6 +59,16 @@ class UserDetailProvider extends ChangeNotifier {
       logger.severe(error.toString());
     }
     logger.fine('Addresses set : ${addresses.length}');
+    notifyListeners();
+  }
+
+  setSelectedAddress(int? index) {
+    if (index != null) {
+      selectedAddressIndex = index;
+    } else {
+      selectedAddressIndex = 0;
+    }
+    logger.fine('Selected address set to : $selectedAddressIndex');
     notifyListeners();
   }
 

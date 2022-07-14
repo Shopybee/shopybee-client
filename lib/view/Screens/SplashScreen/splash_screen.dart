@@ -34,6 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (init) {
       await dataProvider.setUser(userId);
       await dataProvider.setAdderesses();
+      dataProvider.setSelectedAddress(null);
       init = false;
       navigate();
     }
