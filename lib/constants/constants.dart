@@ -5,7 +5,7 @@ import 'package:shopybee/view/Screens/ProfileScreen/profile_screen.dart';
 
 // constant screens
 
- List<dynamic> screens = [
+List<dynamic> screens = [
   HomeScreen(),
   CartScreen(),
   ProfileScreen(),
