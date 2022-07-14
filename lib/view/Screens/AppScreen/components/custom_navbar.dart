@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/app_screen_controller.dart';
-import 'package:shopybee/services/navbar_icons/navbar_icons.dart';
+import 'package:shopybee/uitls/custom_icons/navbar_icons.dart';
+
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({Key? key}) : super(key: key);
