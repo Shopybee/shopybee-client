@@ -13,14 +13,13 @@ class AppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controllerL = Provider.of<AppScreenController>(context);
-    final controller = Provider.of<AppScreenController>(context, listen: false);
-
+    final controller = Provider.of<AppScreenController>(context);
+    
     return SafeArea(
         child: Scaffold(
       bottomNavigationBar: const CustomNavBar(),
       backgroundColor: primaryBackgroundColor,
-      body: screens[controllerL.getIndex],
+      body: screens[controller.getIndex],
     ));
   }
 }

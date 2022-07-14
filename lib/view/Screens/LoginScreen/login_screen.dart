@@ -38,10 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     logger.fine('Login Screen builded successfully');
-    final controllerL = Provider.of<LoginScreenController>(context);
-    final controller =
-        Provider.of<LoginScreenController>(context, listen: false);
-    bool loading = controllerL.getLoading;
+    final controller = Provider.of<LoginScreenController>(context);
+
+    bool loading = controller.getLoading;
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(

@@ -9,9 +9,8 @@ class AddressBookModalSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataProviderL = Provider.of<UserDetailProvider>(context);
-    final dataProvider =
-        Provider.of<UserDetailProvider>(context, listen: false);
+    final dataProvider = Provider.of<UserDetailProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
       child: Column(
@@ -46,15 +45,14 @@ class AddressBookModalSheet extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-              child: (dataProviderL.getAddresses().isNotEmpty)
+              child: (dataProvider.getAddresses().isNotEmpty)
                   ? ListView.builder(
-                      itemCount: dataProviderL.getAddresses().length,
+                      itemCount: dataProvider.getAddresses().length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12.0),
                           child: AddressBox(
-                              addressModel:
-                                  dataProviderL.getAddresses()[index]),
+                              addressModel: dataProvider.getAddresses()[index]),
                         );
                       },
                     )

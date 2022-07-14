@@ -30,8 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() async {
-    final dataProvider =
-        Provider.of<UserDetailProvider>(context, listen: false);
+    final dataProvider = Provider.of<UserDetailProvider>(context);
     if (init) {
       await dataProvider.setUser(userId);
       await dataProvider.setAdderesses();
