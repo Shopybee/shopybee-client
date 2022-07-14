@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logging/logging.dart';
-import 'package:shopybee/uitls/custom_icons/account_overview_custom_icons.dart';
 
 class AccountOverViewBox extends StatelessWidget {
   Logger logger = Logger('AccountOverViewBox');
@@ -11,9 +10,11 @@ class AccountOverViewBox extends StatelessWidget {
       required VoidCallback callback,
       required String label}) {
     return ListTile(
+      onTap: callback,
       contentPadding: EdgeInsets.zero,
       leading: Card(
-        color: cardColor,
+        elevation: 0,
+        color: cardColor.withOpacity(0.3),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -27,6 +28,14 @@ class AccountOverViewBox extends StatelessWidget {
             //fontWeight: FontWeight.w400,
             fontSize: 18,
             fontFamily: "Mukta"),
+      ),
+      trailing: const Padding(
+        padding: EdgeInsets.only(right: 8.0),
+        child: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: Colors.grey,
+          size: 15,
+        ),
       ),
     );
   }

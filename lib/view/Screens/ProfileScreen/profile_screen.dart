@@ -15,8 +15,7 @@ class ProfileScreen extends StatelessWidget {
       width: displayWidth(context),
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: NetworkImage(
-                'https://i.pinimg.com/564x/26/47/62/2647624ed5ad7274676372e560210249.jpg'),
+            image: AssetImage('assets/images/profile_background.jpg'),
             fit: BoxFit.cover),
       ),
       child: Column(
@@ -25,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileBox(),
           Expanded(
               child: Container(
-            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
             decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
