@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/AddressScreen/components/Addresslist.dart';
-import 'package:shopybee/view/Screens/AddressScreen/components/addnewadd.dart';
+import 'package:shopybee/view/ui_blocks/primaryButton.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({Key? key}) : super(key: key);
@@ -9,58 +9,35 @@ class AddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: PrimaryButton(
+            text: "+ Add New Address",
+            height: displayHeight(context) * 0.06,
+            width: displayWidth(context) * 0.6,
+            fontSize: 15,
+            callBack: () {
+              Navigator.pushNamed(context, '/addAddress');
+            }),
+        backgroundColor: Color(0xfbFAF9F6),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.black),
+          title: const Text(
+            "Address book",
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Mukta",
+                fontWeight: FontWeight.w500),
           ),
-          onPressed: () => Navigator.of(context).pop(),
         ),
-        backgroundColor: Colors.white,
-        title: Text(
-          "Addresses",
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: "Mukta",
-              fontSize: displayWidth(context) * 0.045,
-              fontWeight: FontWeight.w500),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                "Done",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontFamily: "Mukta",
-                    fontSize: displayWidth(context) * 0.045,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Container(
-        height: displayHeight(context),
-        width: displayWidth(context),
-        child: Column(
+        body: Column(
           children: [
             SizedBox(
-              height: displayHeight(context) * 0.05,
-              width: displayWidth(context),
+              height: displayHeight(context) * 0.02,
             ),
-            Container(
-              height: displayHeight(context) * 0.7,
-              width: displayWidth(context),
-              child: AddressList(),
-            ),
-            AddNewAddress(),
+            const Expanded(child: AddressList()),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
