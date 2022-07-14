@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class ProfileBox extends StatelessWidget {
   Logger logger = Logger('ProfileBox');
+  final Authservice _auth = Authservice(FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +43,10 @@ class ProfileBox extends StatelessWidget {
                     icon: const Icon(Icons.logout),
                     color: Colors.white,
                     iconSize: 20,
-                    onPressed: () {
-                      logger.info('Logout');
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      await _auth.signOut();
+                      navigator.pushReplacementNamed('/auth');
                     }),
               )
             ],
