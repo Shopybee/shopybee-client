@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/models/UserModel.dart';
+import 'package:shopybee/services/api/delete_service.dart';
 import 'package:shopybee/services/api/get_service.dart';
 import 'package:shopybee/services/api/post_service.dart';
 import 'package:shopybee/services/api/put_service.dart';
@@ -14,6 +15,7 @@ class UserDetailProvider extends ChangeNotifier {
   final PostService _postService = PostService();
   final UpdateService _updateService = UpdateService();
   final GetService _getService = GetService();
+  final DeleteService _deleteService = DeleteService();
   int selectedAddressIndex = -1;
   UserModel? user;
   List<AddressModel> addresses = [];
@@ -124,5 +126,19 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.severe(error.toString());
     }
+  }
+
+  removeAddress({required int addressIndex}) async {
+    try {
+      final String response = await _deleteService.delete(
+          endUrl: "addresses/${user!.id}/${addresses[addressIndex].id}.json");
+
+      if (response.isNotEmpty) {
+        addresses.removeAt(addressIndex);
+      }
+    } catch (error) {
+      logger.severe(error.toString());
+    }
+    notifyListeners();
   }
 }
