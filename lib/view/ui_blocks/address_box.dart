@@ -8,9 +8,10 @@ import 'package:shopybee/uitls/device_size.dart';
 class AddressBox extends StatelessWidget {
   final AddressModel addressModel;
   int index;
-  final bool isSelected;
+  
   AddressBox(
-      {required this.isSelected,
+      {
+    
       required this.addressModel,
       required this.index});
   final Logger _logger = Logger('AddressBox');
@@ -148,7 +149,7 @@ class AddressBox extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: (isSelected)
+              child: (controller.selectedAddressIndex == index)
                   ? Icon(
                       Icons.check,
                       color: Colors.teal,

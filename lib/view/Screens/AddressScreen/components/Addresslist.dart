@@ -23,7 +23,7 @@ class AddressList extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: AddressBox(
-                        isSelected: index == controller.selectedAddressIndex,
+                      
                         index: index,
                         addressModel: controller.getAddresses()[index]),
                   ));
