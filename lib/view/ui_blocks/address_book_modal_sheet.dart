@@ -52,7 +52,9 @@ class AddressBookModalSheet extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12.0),
                           child: AddressBox(
-                            isSelected: index==dataProvider.selectedAddressIndex,
+                              index: index,
+                              isSelected:
+                                  index == dataProvider.selectedAddressIndex,
                               addressModel: dataProvider.getAddresses()[index]),
                         );
                       },

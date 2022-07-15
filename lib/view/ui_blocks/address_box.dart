@@ -7,12 +7,17 @@ import 'package:shopybee/uitls/device_size.dart';
 
 class AddressBox extends StatelessWidget {
   final AddressModel addressModel;
+  int index;
   final bool isSelected;
-  AddressBox({required this.isSelected, required this.addressModel});
+  AddressBox(
+      {required this.isSelected,
+      required this.addressModel,
+      required this.index});
   final Logger _logger = Logger('AddressBox');
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<UserDetailProvider>(context);
     return Container(
       padding: const EdgeInsets.all(8),
       width: displayWidth(context),
@@ -112,6 +117,7 @@ class AddressBox extends StatelessWidget {
                     MaterialButton(
                       onPressed: () {
                         _logger.info('Delete button pressed');
+                        controller.removeAddress(addressIndex: index);
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
