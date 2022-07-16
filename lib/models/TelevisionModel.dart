@@ -17,6 +17,7 @@ class TelivisionModel {
   final int usb;
   final String wifiType;
   final String series;
+  final double price;
 
   TelivisionModel(
       {required this.brand,
@@ -34,7 +35,9 @@ class TelivisionModel {
       required this.series,
       required this.type,
       required this.usb,
-      required this.wifiType});
+      required this.wifiType,
+      required this.price
+      });
 
   factory TelivisionModel.fromjson(Map<dynamic, dynamic> json) {
     return TelivisionModel(
@@ -53,6 +56,8 @@ class TelivisionModel {
         series: json['series'],
         type: json['type'],
         usb: json['usb'],
-        wifiType: json['wifiType']);
+        wifiType: json['wifiType'],
+        price: json['price']
+        );
   }
 }
