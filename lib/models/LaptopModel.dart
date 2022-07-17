@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class LaptopModel {
   final String? type; // in this case type will be the laptop
   final String brandName;
-  final double price;
+  final int price;
   final bool isDealOfTheDay;
   final String modelName; //like 14-s-dy2506TU
   final String colour;
@@ -13,8 +13,8 @@ class LaptopModel {
   final String cpuSpeed;
   final String graphicsCardDescription;
   final String screenSize;
-  final bool isAvailableInStock;
-  final double weight;
+  final bool quantity;
+  final String weight;
   final bool cpuModel;
   final String id;
 
@@ -29,13 +29,13 @@ class LaptopModel {
     required this.graphicsCardDescription,
     required this.screenSize,
     required this.weight,
-    required this.isAvailableInStock,
+    required this.quantity,
     required this.cpuModel,
     required this.id,
     required this.price,
   });
 
-  factory LaptopModel.fromjson(Map<dynamic, dynamic> json) {
+  factory LaptopModel.fromjson(Map<String, dynamic> json) {
     return LaptopModel(
         type: json['type'],
         brandName: json['brandName'],
@@ -47,7 +47,7 @@ class LaptopModel {
         graphicsCardDescription: json['graphicsCardDescription'],
         screenSize: json['screenSize'],
         weight: json['weight'],
-        isAvailableInStock: json['isAvailableInStock'],
+        quantity: json['quantity'],
         cpuModel: json['cpuModel'],
         id: json['id'],
         price: json['price']);

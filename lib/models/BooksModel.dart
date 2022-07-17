@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BooksModel {
+class BookModel
+{
   final String type; // type will bw book !!
   final String id;
-  final double price;
+  final int price;
   final bool isDealOfTheDay;
-  final bool isAvailableInTheStock;
+  final int quantity;
   final String typeOfBook; // Thriller
   final String language;
   final String author;
@@ -13,9 +14,9 @@ class BooksModel {
   final String publisher;
   final String name;
 
-  BooksModel(
+  BookModel(
       {required this.id,
-      required this.isAvailableInTheStock,
+      required this.quantity,
       required this.isDealOfTheDay,
       required this.price,
       required this.type,
@@ -28,10 +29,10 @@ class BooksModel {
 
       });
 
-  factory BooksModel.fromjson(Map<dynamic, dynamic> json) {
-    return BooksModel(
+  factory BookModel.fromjson(Map<String, dynamic> json) {
+    return BookModel(
         id: json['id'],
-        isAvailableInTheStock: json['isAvailableInTheStock'],
+        quantity: json['quantity'],
         isDealOfTheDay: json['isDealOfTheDay'],
         price: json['price'],
         type: json['type'],

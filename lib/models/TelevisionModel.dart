@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class TelivisionModel {
   final String type;
   final String brand;
-  final double screenSize;
+  final String screenSize;
   final bool isDealOfTheDay;
-  final bool isAvailableInTheStock;
+  final int quantity;
   final String id;
   final String modelName;
   final String colour;
@@ -26,7 +26,7 @@ class TelivisionModel {
       required this.hdTechnologyAndResolution,
       required this.hdmi,
       required this.id,
-      required this.isAvailableInTheStock,
+      required this.quantity,
       required this.isDealOfTheDay,
       required this.isSmartTv,
       required this.modelName,
@@ -39,7 +39,7 @@ class TelivisionModel {
       required this.price
       });
 
-  factory TelivisionModel.fromjson(Map<dynamic, dynamic> json) {
+  factory TelivisionModel.fromjson(Map<String, dynamic> json) {
     return TelivisionModel(
         brand: json['brand'],
         builtInWiFi: json['builtInWiFi'],
@@ -47,7 +47,7 @@ class TelivisionModel {
         hdTechnologyAndResolution: json['hdTechnologyAndResolution'],
         hdmi: json['hdmi'],
         id: json['id'],
-        isAvailableInTheStock: json['isAvailableInTheStock'],
+        quantity: json['quantity'],
         isDealOfTheDay: json['isDealOfTheDay'],
         isSmartTv: json['isSmartTv'],
         modelName: json['modelName'],
