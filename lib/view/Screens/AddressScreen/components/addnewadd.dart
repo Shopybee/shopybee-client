@@ -8,7 +8,7 @@ class AddNewAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, '/addAddress'),
-      child: Container(
+      child: SizedBox(
         height: displayHeight(context) * 0.05,
         width: displayWidth(context),
         child: Row(
@@ -17,15 +17,15 @@ class AddNewAddress extends StatelessWidget {
             SizedBox(
               width: displayWidth(context) * 0.25,
             ),
-            Icon(
+            const Icon(
               Icons.add,
               color: Colors.red,
             ),
             SizedBox(
               width: displayWidth(context) * 0.04,
             ),
-            Padding(
-              padding: const EdgeInsets.all(0.8),
+            const Padding(
+              padding: EdgeInsets.all(0.8),
               child: Text("Add New Addresses",
                   style: TextStyle(
                     fontFamily: "Mukta",

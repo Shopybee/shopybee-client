@@ -24,7 +24,6 @@ import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 import 'package:shopybee/view/Screens/SplashScreen/splash_screen.dart';
-
 import 'controllers/app_screen_controller.dart';
 import 'controllers/register_screen_controller.dart';
 

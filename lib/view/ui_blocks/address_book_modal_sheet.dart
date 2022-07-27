@@ -9,8 +9,6 @@ class AddressBookModalSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<UserDetailProvider>(context);
-
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
       child: Column(
@@ -45,25 +43,29 @@ class AddressBookModalSheet extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-              child: (dataProvider.getAddresses().isNotEmpty)
-                  ? ListView.builder(
-                      itemCount: dataProvider.getAddresses().length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
-                          child: AddressBox(
-                              index: index,
-                            
-                              addressModel: dataProvider.getAddresses()[index]),
-                        );
-                      },
-                    )
-                  : const Center(
-                      child: Text(
-                        'No addresses saved',
-                        style: TextStyle(fontFamily: "Mukta", fontSize: 16),
-                      ),
-                    ))
+            child: Consumer<UserDetailProvider>(
+              builder: (context, controller, child) {
+                return (controller.getAddresses().isNotEmpty)
+                    ? ListView.builder(
+                        itemCount: controller.getAddresses().length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: AddressBox(
+                                index: index,
+                                addressModel: controller.getAddresses()[index]),
+                          );
+                        },
+                      )
+                    : const Center(
+                        child: Text(
+                          'No addresses saved',
+                          style: TextStyle(fontFamily: "Mukta", fontSize: 16),
+                        ),
+                      );
+              },
+            ),
+          )
         ],
       ),
     );
