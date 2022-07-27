@@ -38,90 +38,90 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     logger.fine('Login Screen builded successfully');
-    final controller = Provider.of<LoginScreenController>(context);
-
-    bool loading = controller.getLoading;
-    return SafeArea(
-      child: Scaffold(
-          body: SingleChildScrollView(
-        padding: const EdgeInsets.all(15),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBackButton(route: '/auth'),
-              const SizedBox(
-                height: 20,
+    return SafeArea(child: Scaffold(
+      body: Consumer<LoginScreenController>(
+        builder: (context, controller, child) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(15),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomBackButton(route: '/auth'),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Login',
+                    style: authScreensTitleStyle,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  AuthTextField(
+                      label: 'Email',
+                      hintText: 'Enter your email',
+                      controller: emailController),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  AuthPasswordField(
+                      label: 'Password',
+                      hintText: 'Enter your Password',
+                      controller: passwordController),
+                  const ForgotPassword(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // PrimaryButton(text: 'Login',width: displayWidth(context),height: 47,fontSize: 16,),
+                  SizedBox(
+                    width: displayWidth(context),
+                    child: MaterialButton(
+                        onPressed: () async {
+                          final snackbar = ScaffoldMessenger.of(context);
+                          final navigator = Navigator.of(context);
+                          if (_formKey.currentState!.validate()) {
+                            controller.startLoading();
+                            logger.fine('Login form validated');
+                            String? response = await _auth.signIn(
+                                email: emailController.text,
+                                password: passwordController.text);
+                            controller.stopLoading();
+                            if (response != 'valid') {
+                              snackbar.showSnackBar(
+                                  SnackBar(content: Text(response!)));
+                            } else {
+                              navigator.pushReplacementNamed('/splash');
+                            }
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        height: displayHeight(context) * 0.07,
+                        color: primaryColor,
+                        //padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const DontHaveAccount(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  (controller.loading)
+                      ? const Center(child: CircularProgressIndicator())
+                      : const SizedBox(),
+                ],
               ),
-              const Text(
-                'Login',
-                style: authScreensTitleStyle,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              AuthTextField(
-                  label: 'Email',
-                  hintText: 'Enter your email',
-                  controller: emailController),
-              const SizedBox(
-                height: 10,
-              ),
-              AuthPasswordField(
-                  label: 'Password',
-                  hintText: 'Enter your Password',
-                  controller: passwordController),
-              const ForgotPassword(),
-              const SizedBox(
-                height: 20,
-              ),
-              // PrimaryButton(text: 'Login',width: displayWidth(context),height: 47,fontSize: 16,),
-              SizedBox(
-                width: displayWidth(context),
-                child: MaterialButton(
-                    onPressed: () async {
-                      final snackbar = ScaffoldMessenger.of(context);
-                      final navigator = Navigator.of(context);
-                      if (_formKey.currentState!.validate()) {
-                        controller.startLoading();
-                        logger.fine('Login form validated');
-                        String? response = await _auth.signIn(
-                            email: emailController.text,
-                            password: passwordController.text);
-                        controller.stopLoading();
-                        if (response != 'valid') {
-                          snackbar
-                              .showSnackBar(SnackBar(content: Text(response!)));
-                        } else {
-                          navigator.pushReplacementNamed('/splash');
-                        }
-                      }
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    height: displayHeight(context) * 0.07,
-                    color: primaryColor,
-                    //padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const DontHaveAccount(),
-              const SizedBox(
-                height: 50,
-              ),
-              (loading)
-                  ? const Center(child: CircularProgressIndicator())
-                  : const SizedBox(),
-            ],
-          ),
-        ),
-      )),
-    );
+            ),
+          );
+        },
+      ),
+    ));
   }
 }
