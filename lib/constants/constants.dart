@@ -34,8 +34,7 @@ final mutedTextStyle = TextStyle(color: mutedTextColor);
 
 // Api
 
-const baseUrl =
-    'https://shopybee-8115d-default-rtdb.asia-southeast1.firebasedatabase.app/';
+const baseUrl = 'http://10.0.2.2:8080/shopybee/';
 
 // Category
 
@@ -81,3 +80,7 @@ final List<CategoryModel> categories = [
       route: '',
       label: 'Sale'),
 ];
+
+// Image assets
+
+final String profilePic = "assets/images/profile_pic.jpg";

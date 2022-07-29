@@ -4,13 +4,13 @@ import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
+import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/dontHaveAccount.dart';
 import 'package:shopybee/view/Screens/LoginScreen/components/forgotPassword.dart';
 import 'package:shopybee/view/Ui_blocks/authPasswordField.dart';
 import 'package:shopybee/view/Ui_blocks/authTextField.dart';
 import 'package:shopybee/view/ui_blocks/customBackButton.dart';
-import '../../../services/firebase/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -25,8 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  final Authservice _auth = Authservice(FirebaseAuth.instance);
 
   @override
   void dispose() {
@@ -82,16 +80,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           final snackbar = ScaffoldMessenger.of(context);
                           final navigator = Navigator.of(context);
                           if (_formKey.currentState!.validate()) {
+                            final String response =
+                                await Provider.of<UserDetailProvider>(context,
+                                        listen: false)
+                                    .login(
+                                        email: emailController.text,
+                                        password: passwordController.text);
+
                             controller.startLoading();
-                            logger.fine('Login form validated');
-                            String? response = await _auth.signIn(
-                                email: emailController.text,
-                                password: passwordController.text);
-                            controller.stopLoading();
-                            if (response != 'valid') {
-                              snackbar.showSnackBar(
-                                  SnackBar(content: Text(response!)));
-                            } else {
+                            if (response == "OK") {
                               navigator.pushReplacementNamed('/splash');
                             }
                           }

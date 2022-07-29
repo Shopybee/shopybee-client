@@ -142,17 +142,17 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 if (_formKey.currentState!.validate()) {
                   logger.fine('New Address form validated');
                   controller.startLoading();
-                  await dataProvider.createNewAddress(
-                      userId,
-                      AddressModel(
-                          city: cityController.text,
-                          id: '',
-                          name: nameController.text,
-                          phone: phoneNoController.text,
-                          state: stateController.text,
-                          pincode: pincodeController.text,
-                          addressLine: addressLineController.text,
-                          landmark: landmarkController.text));
+                  // await dataProvider.createNewAddress(
+                  //     userId,
+                  //     AddressModel(
+                  //         city: cityController.text,
+                  //         id: '',
+                  //         name: nameController.text,
+                  //         phone: phoneNoController.text,
+                  //         state: stateController.text,
+                  //         pincode: pincodeController.text,
+                  //         addressLine: addressLineController.text,
+                  //         landmark: landmarkController.text));
                   controller.stopLoading();
                 }
               },

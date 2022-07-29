@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
@@ -28,18 +31,8 @@ class UserDetailProvider extends ChangeNotifier {
 
   // setters
 
-  setUser(String uid) async {
-    try {
-      dynamic response = await _getService.get(endUrl: 'users/$uid.json');
-      if (response != null) {
-        Map<String, dynamic> responseBody = getResponseBody(response);
-        user = UserModel.fromJson(responseBody);
-        logger.fine('User set to ${user!.name}');
-      }
-    } catch (error) {
-      logger.severe(error.toString());
-    }
-
+  setUser(UserModel userFromServer) async {
+    user = userFromServer;
     notifyListeners();
   }
 
@@ -74,58 +67,73 @@ class UserDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  createNewAddress(String userId, AddressModel addressModel) async {
+  // createNewAddress(String userId, AddressModel addressModel) async {
+  //   try {
+  //     final postResponse = await _postService.post(
+  //         endUrl: 'addresses/$userId.json',
+  //         data: addressModel.toJson(),
+  //         showMessage: false);
+  //     if (postResponse != null) {
+  //       Map<String, dynamic> responseBody = getResponseBody(postResponse);
+  //       final String addressId = responseBody['name'];
+  //       final updateResponse = await _updateService.update(
+  //           endUrl: 'addresses/$userId/$addressId.json',
+  //           data: {'id': addressId},
+  //           showMessage: true,
+  //           message: "Address saved successfully");
+  //       if (updateResponse.statusCode == 200) {
+  //         addresses.add(AddressModel(
+  //             name: addressModel.name,
+  //             city: addressModel.city,
+  //             id: addressId,
+  //             phone: addressModel.phone,
+  //             state: addressModel.state,
+  //             pincode: addressModel.pincode,
+  //             addressLine: addressModel.addressLine,
+  //             landmark: addressModel.landmark));
+  //       }
+  //     }
+  //   } catch (error) {
+  //     logger.severe(error.toString());
+  //   }
+  //   notifyListeners();
+  // }
+
+  login({required String email, required String password}) async {
     try {
-      final postResponse = await _postService.post(
-          endUrl: 'addresses/$userId.json',
-          data: addressModel.toJson(),
-          showMessage: false);
-      if (postResponse != null) {
-        Map<String, dynamic> responseBody = getResponseBody(postResponse);
-        final String addressId = responseBody['name'];
-        final updateResponse = await _updateService.update(
-            endUrl: 'addresses/$userId/$addressId.json',
-            data: {'id': addressId},
-            showMessage: true,
-            message: "Address saved successfully");
-        if (updateResponse.statusCode == 200) {
-          addresses.add(AddressModel(
-              name: addressModel.name,
-              city: addressModel.city,
-              id: addressId,
-              phone: addressModel.phone,
-              state: addressModel.state,
-              pincode: addressModel.pincode,
-              addressLine: addressModel.addressLine,
-              landmark: addressModel.landmark));
-        }
+      final response = await _postService.post(
+        endUrl: 'user/login',
+        jsondata: json.encode({'email': email, 'password': password}),
+        showMessage: true,
+      );
+      if (response.statusCode == 200) {
+        UserModel user = userModelFromMap(response.body.toString());
+        setUser(user);
+        return "OK";
+      }
+    } catch (error) {}
+    return "NOT-OK";
+  }
+
+  registerNewUser({
+    required UserModel user,
+  }) async {
+    try {
+      final response = await _postService.post(
+          endUrl: 'user/register',
+          jsondata: userModelToMap(user),
+          showMessage: true,
+          message: "Account created successfully");
+
+      if (response.statusCode == 200) {
+        UserModel user = userModelFromMap(response.body.toString());
+        setUser(user);
+        return "OK";
       }
     } catch (error) {
       logger.severe(error.toString());
     }
-    notifyListeners();
-  }
-
-  registerNewUser(
-      {required String id,
-      required String name,
-      required String email,
-      required String phone}) async {
-    try {
-      final response = await _putService.put(
-          endUrl: 'users/$id.json',
-          data: {
-            'name': name,
-            'email': email,
-            'id': id,
-            'phone': phone,
-          },
-          showMessage: true,
-          message: "Account created successfully");
-      return response;
-    } catch (error) {
-      logger.severe(error.toString());
-    }
+    return "NOT-OK";
   }
 
   removeAddress({required int addressIndex}) async {

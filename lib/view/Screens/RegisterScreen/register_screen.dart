@@ -1,13 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:shopybee/models/UserModel.dart';
+import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/view/ui_blocks/authPasswordField.dart';
 import 'package:shopybee/view/ui_blocks/authTextField.dart';
 import 'package:shopybee/view/ui_blocks/customBackButton.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/register_screen_controller.dart';
-import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -28,8 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final Authservice _auth = Authservice(FirebaseAuth.instance);
-
   final space = const SizedBox(height: 10);
 
   @override
@@ -44,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     logger.fine('Register Screen build successfully');
-  
+
     return SafeArea(
       child: Scaffold(
         body: Consumer<RegisterScreenController>(
@@ -135,22 +134,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   final navigator = Navigator.of(context);
                                   if (_formKey.currentState!.validate()) {
                                     logger.info('Registration form validated');
-                                    logger.info(
-                                        'Email : ${emailController.text}');
-
                                     controller.startLoading();
-                                    final String? response = await _auth.signUp(
-                                        phone: phoneController.text,
-                                        name: titleController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                        context: context);
+                                    final String response =
+                                        await Provider.of<UserDetailProvider>(
+                                                context,
+                                                listen: false)
+                                            .registerNewUser(
+                                                user: UserModel(
+                                                    password:
+                                                        passwordController.text,
+                                                    email: emailController.text,
+                                                    name: titleController.text,
+                                                    phone:
+                                                        phoneController.text));
                                     controller.stopLoading();
-                                    if (response != 'valid') {
-                                      snackbar.showSnackBar(
-                                          SnackBar(content: Text(response!)));
-                                    } else {
-                                      logger.fine('Registration successfull');
+                                    if (response == "OK") {
                                       navigator.pushReplacementNamed('/splash');
                                     }
                                   }
