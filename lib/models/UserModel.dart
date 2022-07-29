@@ -1,23 +1,40 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// To parse this JSON data, do
+//
+//     final userModel = userModelFromMap(jsonString);
+
+import 'dart:convert';
+
+UserModel userModelFromMap(String str) => UserModel.fromMap(json.decode(str));
+
+String userModelToMap(UserModel data) => json.encode(data.toMap());
 
 class UserModel {
-  final String? name;
-  final String? phone;
-  final String? email;
-  final String id;
-
   UserModel({
+    this.id,
+    required this.email,
     required this.name,
     required this.phone,
-    required this.email,
-    required this.id,
+    required this.password,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-        name: json['name'],
-        phone: json['phone'],
-        email: json['email'],
-        id: json['id']);
-  }
+  int? id;
+  String email;
+  String name;
+  String phone;
+  String password;
+
+  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
+        id: json["id"],
+        email: json["email"],
+        name: json["name"],
+        phone: json["phone"],
+        password: json["password"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "email": email,
+        "name": name,
+        "phone": phone,
+        "password" : password,
+      };
 }

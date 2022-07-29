@@ -2,18 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
-import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class ProfileBox extends StatelessWidget {
   Logger logger = Logger('ProfileBox');
-  final Authservice _auth = Authservice(FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {
-    final controllerL = Provider.of<UserDetailProvider>(context);
-    final controller = Provider.of<UserDetailProvider>(context);
     return Container(
       height: displayHeight(context) * 0.35,
       width: displayWidth(context),
@@ -45,7 +42,7 @@ class ProfileBox extends StatelessWidget {
                     iconSize: 20,
                     onPressed: () async {
                       final navigator = Navigator.of(context);
-                      await _auth.signOut();
+
                       navigator.pushReplacementNamed('/auth');
                     }),
               )
@@ -55,8 +52,7 @@ class ProfileBox extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: displayWidth(context) * 0.15,
-                backgroundImage: const NetworkImage(
-                    'https://i.pinimg.com/236x/5a/0c/7b/5a0c7b76e2a8bcdbe571c5ba916f93fe.jpg'),
+                backgroundImage: AssetImage(profilePic),
               ),
               Positioned(
                   bottom: 0,
@@ -74,19 +70,27 @@ class ProfileBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text(
-            controllerL.user!.name!,
-            style: const TextStyle(
-                color: Colors.white,
-                letterSpacing: 0.5,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: "PTSerif"),
+          Consumer<UserDetailProvider>(
+            builder: (context, controller, child) {
+              return Text(
+                controller.user!.name,
+                style: const TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: "PTSerif"),
+              );
+            },
           ),
-          Text(
-            '+91${controllerL.user!.phone!}',
-            style: const TextStyle(
-                color: Colors.white70, fontWeight: FontWeight.w500),
+          Consumer<UserDetailProvider>(
+            builder: (context, controller, child) {
+              return Text(
+                '+91${controller.user!.phone}',
+                style: const TextStyle(
+                    color: Colors.white70, fontWeight: FontWeight.w500),
+              );
+            },
           )
         ],
       ),

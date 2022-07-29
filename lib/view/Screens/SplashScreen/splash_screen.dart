@@ -13,32 +13,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final String userId = FirebaseAuth.instance.currentUser!.uid;
   bool init = true;
 
   @override
   void initState() {
     super.initState();
+    navigate();
   }
 
   navigate() async {
+    await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
       final navigator = Navigator.of(context);
       navigator.pushReplacementNamed('/app');
     }
-  }
-
-  @override
-  void didChangeDependencies() async {
-    final dataProvider = Provider.of<UserDetailProvider>(context);
-    if (init) {
-      await dataProvider.setUser(userId);
-      await dataProvider.setAdderesses();
-      dataProvider.setSelectedAddress(null);
-      init = false;
-      navigate();
-    }
-    super.didChangeDependencies();
   }
 
   @override

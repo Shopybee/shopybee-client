@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shopybee/services/firebase/auth_services.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/ProfileScreen/components/account_overview.dart';
 import 'package:shopybee/view/Screens/ProfileScreen/components/profile_box.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final Authservice _auth = Authservice(FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {
