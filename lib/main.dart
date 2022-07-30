@@ -16,6 +16,7 @@ import 'package:shopybee/controllers/add_address_screen_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/providers/firebase_user_provider.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/uitls/global_context.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AddressScreen/address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
@@ -71,24 +72,18 @@ class ShopyBeeApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        routes: {
-          '/auth': (context) => AuthScreen(),
-          '/login': (context) => LoginScreen(),
-          '/register': (context) => RegisterScreen(),
-          '/splash': (context) => SplashScreen(),
-          '/app': (context) => AppScreen(),
-          '/addAddress': (context) => AddAddressScreen(),
-          '/address': (context) => AddressScreen(),
-        },
-        debugShowCheckedModeBanner: false,
-        home: Consumer<AuthNotifier>(
-          builder: (context, notifier, child) {
-            return notifier.user != null
-                ? const SplashScreen()
-                : const Wrapper();
+          routes: {
+            '/auth': (context) => AuthScreen(),
+            '/login': (context) => LoginScreen(),
+            '/register': (context) => RegisterScreen(),
+            '/splash': (context) => SplashScreen(),
+            '/app': (context) => AppScreen(),
+            '/addAddress': (context) => AddAddressScreen(),
+            '/address': (context) => AddressScreen(),
           },
-        ),
-      ),
+          debugShowCheckedModeBanner: false,
+          navigatorKey: GlobalContext.contextKey,
+          home: AuthScreen()),
     );
   }
 }

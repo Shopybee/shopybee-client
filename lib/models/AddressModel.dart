@@ -1,45 +1,58 @@
+// To parse this JSON data, do
+//
+//     final addressModel = addressListFromMap(jsonString);
+
+import 'dart:convert';
+
+List<AddressModel> addressListFromMap(String str) => List<AddressModel>.from(
+    json.decode(str).map((x) => AddressModel.fromMap(x)));
+
+String addressModelToMap(List<AddressModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+
 class AddressModel {
-  final String id;
-  final String city;
-  final String state;
-  final String pincode;
-  final String addressLine;
-  final String? landmark;
-  final String phone;
-  final String name;
+  AddressModel({
+    required this.name,
+    required this.id,
+    required this.userId,
+    required this.addressLine,
+    required this.city,
+    required this.state,
+    required this.landmark,
+    required this.pincode,
+    required this.phone,
+  });
 
-  AddressModel(
-      {required this.city,
-      required this.id,
-      required this.name,
-      required this.phone,
-      required this.state,
-      required this.pincode,
-      required this.addressLine,
-      required this.landmark});
+  int id;
+  String name;
+  int userId;
+  String addressLine;
+  String city;
+  String state;
+  dynamic landmark;
+  String pincode;
+  String phone;
 
-  factory AddressModel.fromJson(Map<String, dynamic> json) {
-    return AddressModel(
-      name: json['name'],
-        city: json['city'],
-        phone: json['phone'],
-        id: json['id'],
-        state: json['state'],
-        pincode: json['pincode'],
-        addressLine: json['addressLine'],
-        landmark: json['landmark']??'null');
-  }
+  factory AddressModel.fromMap(Map<String, dynamic> json) => AddressModel(
+        id: json["id"],
+        name: json['name'],
+        userId: json["userId"],
+        addressLine: json["addressLine"],
+        city: json["city"],
+        state: json["state"],
+        landmark: json["landmark"],
+        pincode: json["pincode"],
+        phone: json["phone"],
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'city': city,
-      'name':name,
-      'phone': phone,
-      'id': id,
-      'state': state,
-      'pincode': pincode,
-      'addressLine': addressLine,
-      'landmark': landmark,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        "userId": userId,
+        "name" : name,
+        "addressLine": addressLine,
+        "city": city,
+        "state": state,
+        "landmark": landmark,
+        "pincode": pincode,
+        "phone": phone,
+      };
 }

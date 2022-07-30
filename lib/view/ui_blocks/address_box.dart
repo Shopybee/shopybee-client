@@ -8,12 +8,8 @@ import 'package:shopybee/uitls/device_size.dart';
 class AddressBox extends StatelessWidget {
   final AddressModel addressModel;
   int index;
-  
-  AddressBox(
-      {
-    
-      required this.addressModel,
-      required this.index});
+
+  AddressBox({required this.addressModel, required this.index});
   final Logger _logger = Logger('AddressBox');
 
   @override

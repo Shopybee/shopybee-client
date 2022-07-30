@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopybee/models/CategoryModel.dart';
 import 'package:shopybee/view/Screens/CartScreen/cart_screen.dart';
+import 'package:shopybee/view/Screens/CategoryScreen/category_screen.dart';
 import 'package:shopybee/view/Screens/HomeScreen/home_screen.dart';
 import 'package:shopybee/view/Screens/ProfileScreen/profile_screen.dart';
 
@@ -8,6 +9,7 @@ import 'package:shopybee/view/Screens/ProfileScreen/profile_screen.dart';
 
 List<dynamic> screens = [
   HomeScreen(),
+  CategoryScreen(),
   CartScreen(),
   ProfileScreen(),
 ];

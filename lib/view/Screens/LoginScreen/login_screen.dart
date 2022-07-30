@@ -80,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           final snackbar = ScaffoldMessenger.of(context);
                           final navigator = Navigator.of(context);
                           if (_formKey.currentState!.validate()) {
+                            controller.startLoading();
                             final String response =
                                 await Provider.of<UserDetailProvider>(context,
                                         listen: false)
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         email: emailController.text,
                                         password: passwordController.text);
 
-                            controller.startLoading();
+                            controller.stopLoading();
                             if (response == "OK") {
                               navigator.pushReplacementNamed('/splash');
                             }

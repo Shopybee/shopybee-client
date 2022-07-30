@@ -7,7 +7,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyWithAppBar(
-        child: Container(
+        body: Container(
       alignment: Alignment.center,
       child: Text('Cart Screen'),
     ));
