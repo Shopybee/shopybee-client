@@ -11,27 +11,35 @@ class CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Provider.of<AppScreenController>(context);
 
-    return BottomNavigationBar(
-        backgroundColor: Colors.white,
-        currentIndex: controller.getIndex,
-        onTap: (index) => controller.changeIndex(index),
-        elevation: 4,
-        selectedItemColor: primaryColor,
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        selectedLabelStyle: const TextStyle(
-          fontFamily: "Mukta",
-        ),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Navbar.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Navbar.cart_plus),
-            label: "Cart",
-          ),
-          BottomNavigationBarItem(icon: Icon(Navbar.user), label: "Profile"),
-        ]);
+    return Consumer<AppScreenController>(
+      builder: (context, controller, child) {
+        return BottomNavigationBar(
+            backgroundColor: Colors.white,
+            currentIndex: controller.getIndex,
+            unselectedItemColor: Colors.grey,
+            onTap: (index) => controller.changeIndex(index),
+            elevation: 4,
+            selectedItemColor: primaryColor,
+            showSelectedLabels: true,
+            showUnselectedLabels: false,
+            selectedLabelStyle: const TextStyle(
+              fontFamily: "Mukta",
+            ),
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Navbar.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.category_outlined), label: "Category"),
+              BottomNavigationBarItem(
+                icon: Icon(Navbar.cart_plus),
+                label: "Cart",
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Navbar.user), label: "Profile"),
+            ]);
+      },
+    );
   }
 }

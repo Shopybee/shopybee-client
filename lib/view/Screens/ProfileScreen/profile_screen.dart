@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/ProfileScreen/components/account_overview.dart';

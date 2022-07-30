@@ -11,11 +11,12 @@ class GetService {
       final response = await http.get(
         Uri.parse(baseUrl + endUrl),
       );
+      logger.info("Get response : ${response.body.toString()}");
       switch (response.statusCode) {
         case 200:
           return response;
         default:
-          return null;
+          return response;
       }
     } catch (error) {
       logger.shout(error);

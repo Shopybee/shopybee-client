@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigate() async {
-    await Future.delayed(const Duration(seconds: 2));
+     await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
       final navigator = Navigator.of(context);
       navigator.pushReplacementNamed('/app');

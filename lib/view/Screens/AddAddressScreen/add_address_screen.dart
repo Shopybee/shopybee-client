@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/add_address_screen_controller.dart';
 import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
@@ -29,8 +30,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   TextEditingController nameController = TextEditingController();
 
-  final String userId = FirebaseAuth.instance.currentUser!.uid;
-
   final _formKey = GlobalKey<FormState>();
 
   final Logger logger = Logger('AddAddressScreen');
@@ -53,25 +52,66 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
     final dataProvider =
         Provider.of<UserDetailProvider>(context, listen: false);
-    return Scaffold(
-      body: SafeArea(
-        child: (controller.getLoading)
-            ? const Center(
+
+    return SafeArea(
+      child: Scaffold(
+        bottomSheet: Consumer<AddAddressScreenController>(
+          builder: (context, controller, child) {
+            return InkWell(
+              onTap: () async {
+                controller.startLoading();
+                await dataProvider.createNewAddress(AddressModel(
+                    name: nameController.text,
+                    id: 1, // Not the actual id
+                    userId: dataProvider.user!.id!,
+                    addressLine: addressLineController.text,
+                    city: cityController.text,
+                    state: stateController.text,
+                    landmark: landmarkController.text,
+                    pincode: pincodeController.text,
+                    phone: phoneNoController.text));
+                controller.stopLoading();
+              },
+              child: Container(
+                height: displayHeight(context) * 0.08,
+                width: displayWidth(context),
+                color: primaryColor,
+                alignment: Alignment.center,
+                child: const Text(
+                  "SAVE",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+          },
+        ),
+        body: Consumer<AddAddressScreenController>(
+          builder: (context, controller, child) {
+            if (controller.loading) {
+              return const Center(
                 child: CircularProgressIndicator(),
-              )
-            : Form(
+              );
+            } else {
+              return Form(
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Add new address',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        ),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              icon: Icon(Icons.arrow_back_ios)),
+                          const Text(
+                            'Add new address',
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 30,
@@ -133,33 +173,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     ],
                   ),
                 ),
-              ),
+              );
+            }
+          },
+        ),
       ),
-      floatingActionButton: MediaQuery.of(context).viewInsets.bottom > 0
-          ? const SizedBox()
-          : PrimaryButton(
-              callBack: () async {
-                if (_formKey.currentState!.validate()) {
-                  logger.fine('New Address form validated');
-                  controller.startLoading();
-                  // await dataProvider.createNewAddress(
-                  //     userId,
-                  //     AddressModel(
-                  //         city: cityController.text,
-                  //         id: '',
-                  //         name: nameController.text,
-                  //         phone: phoneNoController.text,
-                  //         state: stateController.text,
-                  //         pincode: pincodeController.text,
-                  //         addressLine: addressLineController.text,
-                  //         landmark: landmarkController.text));
-                  controller.stopLoading();
-                }
-              },
-              text: "Save Address",
-              height: 45,
-              width: displayWidth(context) * 0.95),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

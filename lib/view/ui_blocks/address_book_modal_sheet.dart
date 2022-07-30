@@ -9,65 +9,79 @@ class AddressBookModalSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0, left: 16, right: 16),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Address book',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontFamily: 'Mukta',
-                      fontWeight: FontWeight.bold)),
-              TextButton.icon(
-                  onPressed: () {
-                    logger.info('Clicked on Add new address button');
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '/addAddress');
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    size: 16,
-                    color: Colors.black54,
-                  ),
-                  label: const Text(
-                    'New',
-                    style: TextStyle(color: Colors.black54),
-                  ))
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: Consumer<UserDetailProvider>(
-              builder: (context, controller, child) {
-                return (controller.getAddresses().isNotEmpty)
-                    ? ListView.builder(
-                        itemCount: controller.getAddresses().length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: AddressBox(
-                                index: index,
-                                addressModel: controller.getAddresses()[index]),
-                          );
+    return DraggableScrollableSheet(
+      initialChildSize: 0.6,
+      maxChildSize: 1.0,
+      minChildSize: 0.5,
+      builder: (context, scrollController) {
+        return Container(
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Address book',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Mukta',
+                            fontWeight: FontWeight.bold)),
+                    TextButton.icon(
+                        onPressed: () {
+                          logger.info('Clicked on Add new address button');
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/addAddress');
                         },
-                      )
-                    : const Center(
-                        child: Text(
-                          'No addresses saved',
-                          style: TextStyle(fontFamily: "Mukta", fontSize: 16),
+                        icon: const Icon(
+                          Icons.add,
+                          size: 16,
+                          color: Colors.black54,
                         ),
-                      );
-              },
+                        label: const Text(
+                          'New',
+                          style: TextStyle(color: Colors.black54),
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Consumer<UserDetailProvider>(
+                  builder: (context, controller, child) {
+                    return (controller.getAddresses().isNotEmpty)
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controller.getAddresses().length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: AddressBox(
+                                    index: index,
+                                    addressModel:
+                                        controller.getAddresses()[index]),
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: Text(
+                              'No addresses saved',
+                              style:
+                                  TextStyle(fontFamily: "Mukta", fontSize: 16),
+                            ),
+                          );
+                  },
+                )
+              ],
             ),
-          )
-        ],
-      ),
+          ),
+        );
+      },
+      expand: false,
     );
   }
 }
