@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/view/ui_blocks/address_box.dart';
 
 class AddressList extends StatelessWidget {

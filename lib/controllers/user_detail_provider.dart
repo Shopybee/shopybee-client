@@ -38,7 +38,6 @@ class UserDetailProvider extends ChangeNotifier {
 
   setAddressStatus(AddressStatus updated) {
     addressStatus = updated;
-    notifyListeners();
   }
 
   setUser(UserModel userFromServer) async {
@@ -144,5 +143,17 @@ class UserDetailProvider extends ChangeNotifier {
     }
     setAddressStatus(AddressStatus.ok);
     notifyListeners();
+  }
+
+  updateAddress(AddressModel updateAddress) async {
+    try {
+      final response = await _putService.put(
+          endUrl: 'address/update',
+          data: updateAddress.toMap(),
+          showMessage: true);
+      if (response.statusCode == 200) {}
+    } catch (error) {
+      logger.severe(error.toString());
+    }
   }
 }

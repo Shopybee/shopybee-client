@@ -12,9 +12,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:shopybee/controllers/category_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
-import 'package:shopybee/providers/firebase_user_provider.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/global_context.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AddressScreen/address_screen.dart';
@@ -47,9 +47,7 @@ class ShopyBeeApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //******* Auth Providers ***********//
-        ChangeNotifierProvider(
-          create: (context) => AuthNotifier(),
-        ),
+        
         //******* Screen controllers ********//
         ChangeNotifierProvider(
           create: (context) => AppScreenController(),
@@ -62,7 +60,7 @@ class ShopyBeeApp extends StatelessWidget {
         ),
 
         //****** Data controllers *******//
-
+        ChangeNotifierProvider(create: (context) => CategoryController(),),
         ChangeNotifierProvider(
           create: (context) => UserDetailProvider(),
         ),

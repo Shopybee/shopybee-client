@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/models/AddressModel.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class AddressBox extends StatelessWidget {
@@ -83,32 +83,34 @@ class AddressBox extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MaterialButton(
-                      onPressed: () {
-                        _logger.info('Edit button pressed');
+                    Consumer<UserDetailProvider>(
+                      builder: (context, controller, child) {
+                        return MaterialButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.edit,
+                                size: 17,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Edit',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: const BorderSide(color: Colors.grey)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.edit,
-                            size: 17,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Edit',
-                            style: TextStyle(
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                     Consumer<UserDetailProvider>(
                       builder: (context, controller, child) {

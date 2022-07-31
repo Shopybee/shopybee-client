@@ -38,51 +38,6 @@ final mutedTextStyle = TextStyle(color: mutedTextColor);
 
 const baseUrl = 'http://10.0.2.2:8080/shopybee/';
 
-// Category
-
-final List<CategoryModel> categories = [
-  CategoryModel(
-      bgcolor: Colors.orange[100]!.withOpacity(0.3),
-      image: 'assets/images/phone.png',
-      route: '',
-      label: 'Mobiles'),
-  CategoryModel(
-      bgcolor: Colors.green[100]!.withOpacity(0.3),
-      image: 'assets/images/tv.png',
-      route: '',
-      label: 'Televisions'),
-  CategoryModel(
-      bgcolor: Colors.blue[100]!.withOpacity(0.3),
-      image: 'assets/images/book.png',
-      route: '',
-      label: 'Books'),
-  CategoryModel(
-      bgcolor: Colors.teal[100]!.withOpacity(0.3),
-      image: 'assets/images/sports.png',
-      route: '',
-      label: 'Sports'),
-  CategoryModel(
-      bgcolor: Colors.brown[100]!.withOpacity(0.3),
-      image: 'assets/images/watch.png',
-      route: '',
-      label: 'Watches'),
-  CategoryModel(
-      bgcolor: Colors.red[100]!.withOpacity(0.3),
-      image: 'assets/images/baby.png',
-      route: '',
-      label: 'Baby'),
-  CategoryModel(
-      bgcolor: Colors.yellow[100]!.withOpacity(0.3),
-      image: 'assets/images/beauty.png',
-      route: '',
-      label: 'Beauty'),
-  CategoryModel(
-      bgcolor: Colors.pink[100]!.withOpacity(0.3),
-      image: 'assets/images/season_sale.png',
-      route: '',
-      label: 'Sale'),
-];
-
 // Image assets
 
 final String profilePic = "assets/images/profile_pic.jpg";
