@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
-import 'package:shopybee/controllers/add_address_screen_controller.dart';
 import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/components/address_textfield.dart';
-import 'package:shopybee/view/Ui_blocks/primaryButton.dart';
 
 class AddAddressScreen extends StatefulWidget {
   @override
@@ -48,29 +45,22 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<AddAddressScreenController>(context);
-
-    final dataProvider =
-        Provider.of<UserDetailProvider>(context, listen: false);
-
     return SafeArea(
       child: Scaffold(
-        bottomSheet: Consumer<AddAddressScreenController>(
+        bottomSheet: Consumer<UserDetailProvider>(
           builder: (context, controller, child) {
             return InkWell(
               onTap: () async {
-                controller.startLoading();
-                await dataProvider.createNewAddress(AddressModel(
+                controller.createNewAddress(AddressModel(
                     name: nameController.text,
                     id: 1, // Not the actual id
-                    userId: dataProvider.user!.id!,
+                    userId: controller.user!.id!,
                     addressLine: addressLineController.text,
                     city: cityController.text,
                     state: stateController.text,
                     landmark: landmarkController.text,
                     pincode: pincodeController.text,
                     phone: phoneNoController.text));
-                controller.stopLoading();
               },
               child: Container(
                 height: displayHeight(context) * 0.08,
@@ -88,9 +78,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             );
           },
         ),
-        body: Consumer<AddAddressScreenController>(
+        body: Consumer<UserDetailProvider>(
           builder: (context, controller, child) {
-            if (controller.loading) {
+            if (controller.addressStatus == AddressStatus.creating) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

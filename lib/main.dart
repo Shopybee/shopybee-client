@@ -12,7 +12,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/controllers/add_address_screen_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/providers/firebase_user_provider.dart';
 import 'package:shopybee/providers/user_detail_provider.dart';
@@ -60,9 +59,6 @@ class ShopyBeeApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => RegisterScreenController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AddAddressScreenController(),
         ),
 
         //****** Data controllers *******//

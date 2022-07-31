@@ -14,7 +14,6 @@ class AddressBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<UserDetailProvider>(context);
     return Container(
       padding: const EdgeInsets.all(8),
       width: displayWidth(context),
@@ -111,47 +110,54 @@ class AddressBox extends StatelessWidget {
                         ],
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        _logger.info('Delete button pressed');
-                        controller.removeAddress(addressIndex: index);
+                    Consumer<UserDetailProvider>(
+                      builder: (context, controller, child) {
+                        return MaterialButton(
+                          onPressed: () {
+                            _logger.info('Delete button pressed');
+                            controller.removeAddress(addressIndex: index);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.delete_forever,
+                                size: 17,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: const BorderSide(color: Colors.grey)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.delete_forever,
-                            size: 17,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Delete',
-                            style: TextStyle(
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
                     )
                   ],
                 )
               ],
             ),
           ),
-          Expanded(
-              child: (controller.selectedAddressIndex == index)
-                  ? Icon(
+          Expanded(child: Consumer<UserDetailProvider>(
+            builder: (context, controller, child) {
+              return (controller.selectedAddressIndex == index)
+                  ? const Icon(
                       Icons.check,
                       color: Colors.teal,
                       size: 25,
                     )
-                  : SizedBox())
+                  : const SizedBox();
+            },
+          ))
         ],
       ),
     );
