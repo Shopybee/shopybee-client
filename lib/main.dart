@@ -14,6 +14,7 @@ import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/category_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
+import 'package:shopybee/controllers/mobile_category_screen_controller.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/global_context.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
@@ -21,6 +22,7 @@ import 'package:shopybee/view/Screens/AddressScreen/address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
+import 'package:shopybee/view/Screens/MobileCategoryScreen/mobile_category_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 import 'package:shopybee/view/Screens/SplashScreen/splash_screen.dart';
 import 'controllers/app_screen_controller.dart';
@@ -61,6 +63,7 @@ class ShopyBeeApp extends StatelessWidget {
 
         //****** Data controllers *******//
         ChangeNotifierProvider(create: (context) => CategoryController(),),
+        ChangeNotifierProvider(create: (context) => MobileCategoryScreenController(),),
         ChangeNotifierProvider(
           create: (context) => UserDetailProvider(),
         ),
@@ -74,6 +77,7 @@ class ShopyBeeApp extends StatelessWidget {
             '/app': (context) => AppScreen(),
             '/addAddress': (context) => AddAddressScreen(),
             '/address': (context) => AddressScreen(),
+            '/mobileCategory':(context) => MobileCategoryScreen(),
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: GlobalContext.contextKey,

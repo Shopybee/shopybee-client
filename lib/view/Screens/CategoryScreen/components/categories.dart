@@ -13,7 +13,13 @@ class Categories extends StatelessWidget {
       builder: (context, controller, child) {
         return InkWell(
           onTap: () {
-            //logger.info(categories[index].label);
+            switch (controller.categories[index].name) {
+              case "Mobile":
+                Navigator.pushNamed(context, '/mobileCategory');
+                break;
+              default:
+                print("Something");
+            }
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
