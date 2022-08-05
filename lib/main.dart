@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/category_controller.dart';
+import 'package:shopybee/controllers/display_mobiles_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
 import 'package:shopybee/controllers/mobile_category_screen_controller.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
@@ -63,6 +64,7 @@ class ShopyBeeApp extends StatelessWidget {
 
         //****** Data controllers *******//
         ChangeNotifierProvider(create: (context) => CategoryController(),),
+        ChangeNotifierProvider(create: (context) => DisplayMobileController(),),
         ChangeNotifierProvider(create: (context) => MobileCategoryScreenController(),),
         ChangeNotifierProvider(
           create: (context) => UserDetailProvider(),

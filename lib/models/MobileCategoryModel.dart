@@ -11,10 +11,11 @@ String mobileCategoryModelToMap(List<MobileCategoryModel> data) => json.encode(L
 class MobileCategoryModel {
     MobileCategoryModel({
         required this.name,
+        required this.id,
         required this.categoryId,
         required this.logo,
     });
-
+    int id;
     String name;
     int categoryId;
     String logo;
@@ -23,6 +24,7 @@ class MobileCategoryModel {
         name: json["name"],
         categoryId: json["categoryId"],
         logo: json["logo"],
+        id: json['id'],
     );
 
     Map<String, dynamic> toMap() => {
