@@ -9,6 +9,8 @@ import 'package:shopybee/services/api/post_service.dart';
 import 'package:shopybee/services/api/put_service.dart';
 import 'package:shopybee/services/api/update_service.dart';
 
+enum AddressStatus { notFetched, fetching, editing, deleting, ok, creating }
+
 class UserDetailProvider extends ChangeNotifier {
   final Logger logger = Logger('UserDetailProvider');
   final PutService _putService = PutService();
@@ -16,6 +18,7 @@ class UserDetailProvider extends ChangeNotifier {
   final UpdateService _updateService = UpdateService();
   final GetService _getService = GetService();
   final DeleteService _deleteService = DeleteService();
+  AddressStatus addressStatus = AddressStatus.notFetched;
 
   // screen controlling variables
 
@@ -33,6 +36,10 @@ class UserDetailProvider extends ChangeNotifier {
 
   // setters
 
+  setAddressStatus(AddressStatus updated) {
+    addressStatus = updated;
+  }
+
   setUser(UserModel userFromServer) async {
     user = userFromServer;
     logger.info("User set to : ${user!.name}");
@@ -40,7 +47,6 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   setAdderesses() async {
-    fetchedAddresses = false;
     List<AddressModel> tempList = [];
     try {
       final response =
@@ -53,7 +59,7 @@ class UserDetailProvider extends ChangeNotifier {
       logger.severe(error.toString());
       logger.fine('Addresses set : ${addresses.length}');
     }
-    fetchedAddresses = true;
+    setAddressStatus(AddressStatus.ok);
     setSelectedAddress(null);
     notifyListeners();
   }
@@ -69,6 +75,7 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   createNewAddress(AddressModel addressModel) async {
+    setAddressStatus(AddressStatus.creating);
     try {
       final response = await _postService.post(
           endUrl: 'address/create',
@@ -82,6 +89,7 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.severe(error.toString());
     }
+    setAddressStatus(AddressStatus.ok);
     notifyListeners();
   }
 
@@ -123,16 +131,29 @@ class UserDetailProvider extends ChangeNotifier {
   }
 
   removeAddress({required int addressIndex}) async {
+    setAddressStatus(AddressStatus.deleting);
     try {
-      final String response = await _deleteService.delete(
-          endUrl: "addresses/${user!.id}/${addresses[addressIndex].id}.json");
-
-      if (response.isNotEmpty) {
+      final response = await _deleteService.delete(
+          endUrl: 'address/delete/${addresses[addressIndex].id}');
+      if (response.statusCode == 200) {
         addresses.removeAt(addressIndex);
       }
     } catch (error) {
       logger.severe(error.toString());
     }
+    setAddressStatus(AddressStatus.ok);
     notifyListeners();
+  }
+
+  updateAddress(AddressModel updateAddress) async {
+    try {
+      final response = await _putService.put(
+          endUrl: 'address/update',
+          data: updateAddress.toMap(),
+          showMessage: true);
+      if (response.statusCode == 200) {}
+    } catch (error) {
+      logger.severe(error.toString());
+    }
   }
 }

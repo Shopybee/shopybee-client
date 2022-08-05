@@ -12,16 +12,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/controllers/add_address_screen_controller.dart';
+import 'package:shopybee/controllers/category_controller.dart';
+import 'package:shopybee/controllers/display_mobiles_controller.dart';
 import 'package:shopybee/controllers/login_screen_controller.dart';
-import 'package:shopybee/providers/firebase_user_provider.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/mobile_category_screen_controller.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/global_context.dart';
 import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AddressScreen/address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
+import 'package:shopybee/view/Screens/MobileCategoryScreen/mobile_category_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 import 'package:shopybee/view/Screens/SplashScreen/splash_screen.dart';
 import 'controllers/app_screen_controller.dart';
@@ -48,9 +50,7 @@ class ShopyBeeApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //******* Auth Providers ***********//
-        ChangeNotifierProvider(
-          create: (context) => AuthNotifier(),
-        ),
+        
         //******* Screen controllers ********//
         ChangeNotifierProvider(
           create: (context) => AppScreenController(),
@@ -61,12 +61,11 @@ class ShopyBeeApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => RegisterScreenController(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => AddAddressScreenController(),
-        ),
 
         //****** Data controllers *******//
-
+        ChangeNotifierProvider(create: (context) => CategoryController(),),
+        ChangeNotifierProvider(create: (context) => DisplayMobileController(),),
+        ChangeNotifierProvider(create: (context) => MobileCategoryScreenController(),),
         ChangeNotifierProvider(
           create: (context) => UserDetailProvider(),
         ),
@@ -80,6 +79,7 @@ class ShopyBeeApp extends StatelessWidget {
             '/app': (context) => AppScreen(),
             '/addAddress': (context) => AddAddressScreen(),
             '/address': (context) => AddressScreen(),
+            '/mobileCategory':(context) => MobileCategoryScreen(),
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: GlobalContext.contextKey,

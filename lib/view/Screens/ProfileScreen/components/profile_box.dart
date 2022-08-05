@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class ProfileBox extends StatelessWidget {

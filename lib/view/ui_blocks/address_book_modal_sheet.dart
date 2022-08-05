@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/view/ui_blocks/address_box.dart';
 
 class AddressBookModalSheet extends StatelessWidget {
@@ -52,28 +52,62 @@ class AddressBookModalSheet extends StatelessWidget {
                 ),
                 Consumer<UserDetailProvider>(
                   builder: (context, controller, child) {
-                    return (controller.getAddresses().isNotEmpty)
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: controller.getAddresses().length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 12.0),
-                                child: AddressBox(
-                                    index: index,
-                                    addressModel:
-                                        controller.getAddresses()[index]),
+                    if (controller.addressStatus == AddressStatus.notFetched) {
+                      controller.setAddressStatus(AddressStatus.fetching);
+                      controller.setAdderesses();
+                    }
+                    switch (controller.addressStatus) {
+                      case AddressStatus.creating:
+                        return const Center(
+                          child: Text('Create'),
+                        );
+                      case AddressStatus.editing:
+                        return const Center(
+                          child: Text('Editing'),
+                        );
+                      case AddressStatus.notFetched:
+                        return const Center(
+                          child: Text('Tap to fetch'),
+                        );
+
+                      case AddressStatus.fetching:
+                        return const Center(
+                          child: Text('Fetching'),
+                        );
+
+                      case AddressStatus.deleting:
+                        return const Center(
+                          child: Text('Deleting'),
+                        );
+                      case AddressStatus.ok:
+                        return (controller.getAddresses().isNotEmpty)
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.getAddresses().length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 12.0),
+                                    child: InkWell(
+                                      onTap: () =>
+                                          controller.setSelectedAddress(index),
+                                      child: AddressBox(
+                                          index: index,
+                                          addressModel:
+                                              controller.getAddresses()[index]),
+                                    ),
+                                  );
+                                },
+                              )
+                            : const Center(
+                                child: Text(
+                                  'No addresses saved',
+                                  style: TextStyle(
+                                      fontFamily: "Mukta", fontSize: 16),
+                                ),
                               );
-                            },
-                          )
-                        : const Center(
-                            child: Text(
-                              'No addresses saved',
-                              style:
-                                  TextStyle(fontFamily: "Mukta", fontSize: 16),
-                            ),
-                          );
+                    }
                   },
                 )
               ],

@@ -4,7 +4,7 @@ import 'package:shopybee/constants/constants.dart';
 
 class DeleteService {
   Logger logger = Logger('DeleteService');
-  Future<String> delete({
+  Future<dynamic> delete({
     required String endUrl,
   }) async {
     String status = "";
@@ -15,9 +15,9 @@ class DeleteService {
       switch (response.statusCode) {
         case 200:
           status = "OK";
-          break;
+          return response;
         default:
-          return "";
+          return response;
       }
     } catch (error) {
       logger.shout(error);

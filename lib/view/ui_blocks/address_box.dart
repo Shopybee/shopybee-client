@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/models/AddressModel.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class AddressBox extends StatelessWidget {
@@ -14,7 +14,6 @@ class AddressBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<UserDetailProvider>(context);
     return Container(
       padding: const EdgeInsets.all(8),
       width: displayWidth(context),
@@ -84,74 +83,83 @@ class AddressBox extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MaterialButton(
-                      onPressed: () {
-                        _logger.info('Edit button pressed');
+                    Consumer<UserDetailProvider>(
+                      builder: (context, controller, child) {
+                        return MaterialButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.edit,
+                                size: 17,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Edit',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: const BorderSide(color: Colors.grey)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.edit,
-                            size: 17,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Edit',
-                            style: TextStyle(
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        _logger.info('Delete button pressed');
-                        controller.removeAddress(addressIndex: index);
+                    Consumer<UserDetailProvider>(
+                      builder: (context, controller, child) {
+                        return MaterialButton(
+                          onPressed: () {
+                            _logger.info('Delete button pressed');
+                            controller.removeAddress(addressIndex: index);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.delete_forever,
+                                size: 17,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Delete',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: const BorderSide(color: Colors.grey)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.delete_forever,
-                            size: 17,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Delete',
-                            style: TextStyle(
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
                     )
                   ],
                 )
               ],
             ),
           ),
-          Expanded(
-              child: (controller.selectedAddressIndex == index)
-                  ? Icon(
+          Expanded(child: Consumer<UserDetailProvider>(
+            builder: (context, controller, child) {
+              return (controller.selectedAddressIndex == index)
+                  ? const Icon(
                       Icons.check,
                       color: Colors.teal,
                       size: 25,
                     )
-                  : SizedBox())
+                  : const SizedBox();
+            },
+          ))
         ],
       ),
     );

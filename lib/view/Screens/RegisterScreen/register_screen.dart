@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/models/UserModel.dart';
-import 'package:shopybee/providers/user_detail_provider.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/view/ui_blocks/authPasswordField.dart';
 import 'package:shopybee/view/ui_blocks/authTextField.dart';
 import 'package:shopybee/view/ui_blocks/customBackButton.dart';
