@@ -22,6 +22,7 @@ import 'package:shopybee/view/Screens/AddAddressScreen/add_address_screen.dart';
 import 'package:shopybee/view/Screens/AddressScreen/address_screen.dart';
 import 'package:shopybee/view/Screens/AppScreen/app_screen.dart';
 import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
+import 'package:shopybee/view/Screens/EditProfileScreen/edit_profile_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/MobileCategoryScreen/mobile_category_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
@@ -72,6 +73,7 @@ class ShopyBeeApp extends StatelessWidget {
       ],
       child: MaterialApp(
           routes: {
+
             '/auth': (context) => AuthScreen(),
             '/login': (context) => LoginScreen(),
             '/register': (context) => RegisterScreen(),
@@ -80,6 +82,7 @@ class ShopyBeeApp extends StatelessWidget {
             '/addAddress': (context) => AddAddressScreen(),
             '/address': (context) => AddressScreen(),
             '/mobileCategory':(context) => MobileCategoryScreen(),
+            '/editProfile':(context) => EditProfileScreen(),
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: GlobalContext.contextKey,

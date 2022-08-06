@@ -62,7 +62,7 @@ class ProfileBox extends StatelessWidget {
                     child: IconButton(
                       iconSize: 18,
                       onPressed: () {
-                        logger.info('Edit');
+                       Navigator.pushNamed(context, '/editProfile');
                       },
                       icon: const Icon(Icons.edit),
                     ),
