@@ -65,14 +65,23 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               child: Container(
                 height: displayHeight(context) * 0.08,
                 width: displayWidth(context),
-                color: primaryColor,
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 30),
                 alignment: Alignment.center,
-                child: const Text(
-                  "SAVE",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                child: SizedBox(
+                  width: displayWidth(context),
+                  child: MaterialButton(
+                    color: primaryColor,
+                    height: displayHeight(context)*0.05,
+                    onPressed: () {  },
+                    child: const Text(
+                      "SAVE DETAILS",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
             );
