@@ -5,7 +5,7 @@ import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/mobile_category_screen_controller.dart';
 import 'package:shopybee/models/MobileCategoryModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
-import 'package:shopybee/view/Screens/Products/Mobiles/mobile_pd.dart';
+import 'package:shopybee/view/Screens/Products/Mobiles/MobileListDisplay/mobile_pd.dart';
 
 class MobileCategoryScreen extends StatelessWidget {
   final Logger logger = Logger("MobileCategoryScreen");
