@@ -136,9 +136,9 @@ class DisplayMobiles extends StatelessWidget {
           switch (controller.status[brandId]) {
             case DisplayMobileStatus.fetched:
               return ListView.builder(
-                itemCount: controller.listOfMobiles.length,
+                itemCount: controller.listOfMobiles[brandId]!.length,
                 itemBuilder: (context, index) {
-                  return mobileCard(controller.listOfMobiles[index]);
+                  return mobileCard(controller.listOfMobiles[brandId]![index]);
                 },
               );
             case DisplayMobileStatus.fetching:

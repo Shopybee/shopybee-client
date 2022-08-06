@@ -10,12 +10,11 @@ class DisplayMobileController with ChangeNotifier{
   Logger _logger = Logger("DisplayMobileController");
 
   //DisplayMobileStatus status=DisplayMobileStatus.notFetched;
-  List<MobileModel> listOfMobiles = [];
+  Map<int,List<MobileModel>> listOfMobiles = {};
   Map<int,DisplayMobileStatus> status= {};
 
   setStatus(int brandId,DisplayMobileStatus updated){
     status[brandId]=updated;
-    notifyListeners();
   }
 
   getAllMobilesByBrand(int brandId)async{
@@ -23,7 +22,7 @@ class DisplayMobileController with ChangeNotifier{
     try{
       final response = await _getService.get(endUrl: 'mobiles/getAll/${brandId}');
       if(response.statusCode == 200){
-        listOfMobiles = mobileModelFromMap(response.body.toString());
+        listOfMobiles[brandId] = mobileModelFromMap(response.body.toString());
       }
     }
     catch(error){
