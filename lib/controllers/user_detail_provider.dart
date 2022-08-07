@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
+import 'package:shopybee/models/CartModel.dart';
 import 'package:shopybee/models/UserModel.dart';
 import 'package:shopybee/services/api/delete_service.dart';
 import 'package:shopybee/services/api/get_service.dart';
@@ -11,7 +12,11 @@ import 'package:shopybee/services/api/update_service.dart';
 
 enum AddressStatus { notFetched, fetching, editing, deleting, ok, creating }
 
+enum CartStatus { fetched, notFetched, fetching }
+
 class UserDetailProvider extends ChangeNotifier {
+  CartStatus cartStatus = CartStatus.notFetched;
+  List<CartModel> cart = [];
   final Logger logger = Logger('UserDetailProvider');
   final PutService _putService = PutService();
   final PostService _postService = PostService();
@@ -149,11 +154,101 @@ class UserDetailProvider extends ChangeNotifier {
     try {
       final response = await _putService.put(
           endUrl: 'address/update',
-          data: updateAddress.toMap(),
+          jsondata: jsonEncode(updateAddress.toMap()),
           showMessage: true);
       if (response.statusCode == 200) {}
     } catch (error) {
       logger.severe(error.toString());
     }
+  }
+
+  //****   User cart   *************/
+
+  setStatus(CartStatus updatedStatus) {
+    cartStatus = updatedStatus;
+  }
+
+  getCart() async {
+    setStatus(CartStatus.fetching);
+    try {
+      final response = await _getService.get(
+          endUrl: 'cart/get-cart-items-by-user-id/${user!.id}');
+      if (response.statusCode == 200) {
+        cart = cartModelFromMap(response.body.toString());
+      }
+    } catch (error) {
+      logger.shout(error.toString());
+    }
+    setStatus(CartStatus.fetched);
+    notifyListeners();
+  }
+
+  addToCart(int categoryId, int brandId, int productId) async {
+    setStatus(CartStatus.fetching);
+    notifyListeners();
+    try {
+      final response = await _postService.post(
+          endUrl: 'cart/add-to-cart',
+          jsondata: jsonEncode({
+            'quantity': 1,
+            'brandId': brandId,
+            'categoryId': categoryId,
+            'productId': productId,
+            'userId': user!.id,
+          }),
+          showMessage: true);
+      if (response.statusCode == 200) {
+        CartModel addedItem = CartModel.fromMap(jsonDecode(response.body));
+        cart.add(addedItem);
+      }
+    } catch (error) {
+      logger.shout(error.toString());
+    }
+    setStatus(CartStatus.fetched);
+    notifyListeners();
+  }
+
+  updateCart(int index, int cartId, int quantity, int categoryId, int brandId,
+      int productId) async {
+    setStatus(CartStatus.fetching);
+    notifyListeners();
+    try {
+      final response = await _putService.put(
+          endUrl: 'cart/update-cart',
+          jsondata: jsonEncode({
+            'cartId': cartId,
+            'quantity': quantity,
+            'brandId': brandId,
+            'categoryId': categoryId,
+            'productId': productId,
+            'userId': user!.id,
+          }),
+          showMessage: false);
+      if (response.statusCode == 200) {
+        CartModel addedItem = CartModel.fromMap(jsonDecode(response.body));
+        cart.removeAt(index);
+        cart.insert(index, addedItem);
+      }
+    } catch (error) {
+      logger.shout(error.toString());
+    }
+    setStatus(CartStatus.fetched);
+    notifyListeners();
+  }
+
+  removeItemFromCart(int cartId) async {
+    setStatus(CartStatus.fetching);
+    notifyListeners();
+    try {
+      final response =
+          await _deleteService.delete(endUrl: 'cart/remove-from-cart/$cartId');
+      if (response.statusCode == 200) {
+        cart.removeWhere((item) => item.cartId == cartId);
+      }
+    } catch (error) {
+      logger.shout(error.toString());
+    }
+    setStatus(CartStatus.fetched);
+    notifyListeners();
   }
 }
