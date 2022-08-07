@@ -15,6 +15,7 @@ class Categories extends StatelessWidget {
           onTap: () {
             switch (controller.categories[index].name) {
               case "Mobiles":
+                logger.info('Going to Mobile Category');
                 Navigator.pushNamed(context, '/mobileCategory');
                 break;
               default:

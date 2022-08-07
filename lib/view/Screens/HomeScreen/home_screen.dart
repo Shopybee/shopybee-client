@@ -9,10 +9,7 @@ class HomeScreen extends StatelessWidget {
     return BodyWithAppBar(
       body: ListView(
         padding: const EdgeInsets.only(top: kToolbarHeight),
-        children: [
-          //const SizedBox(height: 20),
-          //Categories(),
-        ],
+        children: [],
       ),
     );
   }
