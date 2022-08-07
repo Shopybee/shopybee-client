@@ -17,7 +17,12 @@ class MobileCategoryScreen extends StatelessWidget {
             controller.mobileCategoryList[index];
         return InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => DisplayMobiles(brandId: categoryModel.id),));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      DisplayMobiles(brandId: categoryModel.brandId),
+                ));
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +96,8 @@ class MobileCategoryScreen extends StatelessWidget {
                             itemCount: controlller.mobileCategoryList.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: const EdgeInsets.only(left: 4,right: 15),
+                                padding:
+                                    const EdgeInsets.only(left: 4, right: 15),
                                 child: mobilecCategoryCard(index),
                               );
                             },

@@ -14,7 +14,7 @@ class Categories extends StatelessWidget {
         return InkWell(
           onTap: () {
             switch (controller.categories[index].name) {
-              case "Mobile":
+              case "Mobiles":
                 Navigator.pushNamed(context, '/mobileCategory');
                 break;
               default:
@@ -38,6 +38,7 @@ class Categories extends StatelessWidget {
                 width: displayWidth(context) * 0.2,
                 child: Text(
                   controller.categories[index].name,
+                  overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: Colors.black, fontSize: 15, fontFamily: "Mukta"),
