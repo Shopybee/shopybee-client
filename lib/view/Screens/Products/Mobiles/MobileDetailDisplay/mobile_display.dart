@@ -112,6 +112,18 @@ class MobileDetailDisplay extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+              child: Text('Description',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+              child: Text(mobile.description),
+            ),
             Details(
               mobile: mobile,
             ),

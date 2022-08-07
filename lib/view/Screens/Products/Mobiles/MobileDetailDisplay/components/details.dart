@@ -57,15 +57,11 @@ class Details extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          detailRow("RAM", mobile.ram.toString()),
+          detailRow("RAM", '${mobile.ram} GB'),
           const SizedBox(
             height: 8,
           ),
-          detailRow("Memory Storage", mobile.storage.toString()),
-          const SizedBox(
-            height: 8,
-          ),
-          detailRow("Screen size", mobile.display),
+          detailRow("Memory Storage", '${mobile.storage} GB'),
           const SizedBox(
             height: 8,
           ),
@@ -78,6 +74,25 @@ class Details extends StatelessWidget {
             height: 8,
           ),
           detailRow("Screen size", mobile.display),
+          const SizedBox(
+            height: 8,
+          ),
+          detailRow("Processor", mobile.processor),
+          const SizedBox(
+            height: 8,
+          ),
+          detailRow("Battery Backup", '${mobile.batteryBackup} mAH'),
+          const SizedBox(
+            height: 8,
+          ),
+          detailRow("Number of Sim Slots", mobile.simCardSlot),
+          const SizedBox(
+            height: 8,
+          ),
+          detailRow("Items in the box", mobile.itemsInBox),
+          SizedBox(
+            height: displayHeight(context) * 0.08,
+          ),
         ],
       ),
     );
