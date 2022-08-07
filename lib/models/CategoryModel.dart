@@ -13,23 +13,22 @@ String categoryModelToMap(List<CategoryModel> data) =>
 
 class CategoryModel {
   CategoryModel({
-    required this.id,
+    required this.categoryId,
     required this.name,
     required this.image,
   });
 
-  int id;
+  int categoryId;
   String name;
   String image;
 
   factory CategoryModel.fromMap(Map<String, dynamic> json) => CategoryModel(
-        id: json["id"],
+        categoryId: json["categoryId"],
         name: json["name"],
         image: json["image"],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
         "name": name,
         "image": image,
       };

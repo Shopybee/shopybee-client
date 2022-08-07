@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
+import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/models/MobileModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
+import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/components/cart_bottom_sheet.dart';
 import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/components/change_address_bar.dart';
 import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/components/details.dart';
 import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/components/mobile_images.dart';
 
 class MobileDetailDisplay extends StatelessWidget {
   MobileModel mobile;
+  int categoryId;
+  final _logger = Logger('MobileDetailDisplay');
 
-  MobileDetailDisplay({required this.mobile});
+  MobileDetailDisplay({required this.mobile, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +54,8 @@ class MobileDetailDisplay extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      bottomSheet: Container(
-        height: displayHeight(context) * 0.065,
-        width: displayWidth(context),
-        color: primaryColor,
-        alignment: Alignment.center,
-        child: const Text(
-          'ADD TO CART',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
+      bottomSheet:
+          MobileDetailBottomSheetCart(categoryId: categoryId, mobile: mobile),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +110,7 @@ class MobileDetailDisplay extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
               child: Text('Description',
                   style: TextStyle(

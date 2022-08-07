@@ -4,20 +4,27 @@ import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/display_mobiles_controller.dart';
 import 'package:shopybee/models/MobileModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
-import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/mobile_display.dart';
+import 'package:shopybee/view/Screens/Products/Mobiles/MobileDetailDisplay/mobile_detail_display.dart';
 
 import '../../../../../constants/constants.dart';
 
 class DisplayMobiles extends StatelessWidget {
   final int brandId;
-  DisplayMobiles({required this.brandId});
+  final int categoryId;
+  DisplayMobiles({required this.brandId, required this.categoryId});
   Logger _logger = Logger("DisplayMobiles");
 
   mobileCard(MobileModel mobile) {
     return Builder(builder: (context) {
       return InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MobileDetailDisplay(mobile: mobile),));
+          _logger.info('Going to MobileDetailDisplay');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    MobileDetailDisplay(mobile: mobile, categoryId: categoryId),
+              ));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +87,7 @@ class DisplayMobiles extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(
+                  const Text(
                     'Free delivery',
                   )
                 ],
@@ -91,12 +98,12 @@ class DisplayMobiles extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: Card(
                 elevation: 0.6,
+                shape: const CircleBorder(),
                 child: IconButton(
                   color: Colors.grey.shade400,
                   onPressed: () {},
-                  icon: Icon(Icons.favorite),
+                  icon: const Icon(Icons.favorite),
                 ),
-                shape: const CircleBorder(),
                 // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
               ),
             ))
