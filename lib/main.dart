@@ -51,7 +51,7 @@ class ShopyBeeApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //******* Auth Providers ***********//
-        
+
         //******* Screen controllers ********//
         ChangeNotifierProvider(
           create: (context) => AppScreenController(),
@@ -64,16 +64,21 @@ class ShopyBeeApp extends StatelessWidget {
         ),
 
         //****** Data controllers *******//
-        ChangeNotifierProvider(create: (context) => CategoryController(),),
-        ChangeNotifierProvider(create: (context) => DisplayMobileController(),),
-        ChangeNotifierProvider(create: (context) => MobileCategoryScreenController(),),
+        ChangeNotifierProvider(
+          create: (context) => CategoryController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DisplayMobileController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MobileCategoryScreenController(),
+        ),
         ChangeNotifierProvider(
           create: (context) => UserDetailProvider(),
         ),
       ],
       child: MaterialApp(
           routes: {
-
             '/auth': (context) => AuthScreen(),
             '/login': (context) => LoginScreen(),
             '/register': (context) => RegisterScreen(),
@@ -81,27 +86,12 @@ class ShopyBeeApp extends StatelessWidget {
             '/app': (context) => AppScreen(),
             '/addAddress': (context) => AddAddressScreen(),
             '/address': (context) => AddressScreen(),
-            '/mobileCategory':(context) => MobileCategoryScreen(),
-            '/editProfile':(context) => EditProfileScreen(),
+            '/mobileCategory': (context) => MobileCategoryScreen(),
+            '/editProfile': (context) => EditProfileScreen(),
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: GlobalContext.contextKey,
           home: AuthScreen()),
     );
-  }
-}
-
-class Wrapper extends StatelessWidget {
-  const Wrapper({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User?>();
-
-    if (firebaseUser != null) {
-      return const SplashScreen();
-    } else {
-      return AuthScreen();
-    }
   }
 }
