@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
+import 'package:shopybee/uitls/enums.dart';
 import 'package:shopybee/view/ui_blocks/address_box.dart';
 
 class AddressBookModalSheet extends StatelessWidget {

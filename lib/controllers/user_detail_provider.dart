@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
+import 'package:shopybee/models/CartItemModel.dart';
 import 'package:shopybee/models/CartModel.dart';
 import 'package:shopybee/models/UserModel.dart';
 import 'package:shopybee/services/api/delete_service.dart';
@@ -9,10 +10,7 @@ import 'package:shopybee/services/api/get_service.dart';
 import 'package:shopybee/services/api/post_service.dart';
 import 'package:shopybee/services/api/put_service.dart';
 import 'package:shopybee/services/api/update_service.dart';
-
-enum AddressStatus { notFetched, fetching, editing, deleting, ok, creating }
-
-enum CartStatus { fetched, notFetched, fetching }
+import 'package:shopybee/uitls/enums.dart';
 
 class UserDetailProvider extends ChangeNotifier {
   CartStatus cartStatus = CartStatus.notFetched;
@@ -164,12 +162,12 @@ class UserDetailProvider extends ChangeNotifier {
 
   //****   User cart   *************/
 
-  setStatus(CartStatus updatedStatus) {
+  setCartStatus(CartStatus updatedStatus) {
     cartStatus = updatedStatus;
   }
 
   getCart() async {
-    setStatus(CartStatus.fetching);
+    setCartStatus(CartStatus.fetching);
     try {
       final response = await _getService.get(
           endUrl: 'cart/get-cart-items-by-user-id/${user!.id}');
@@ -179,12 +177,12 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.shout(error.toString());
     }
-    setStatus(CartStatus.fetched);
+    setCartStatus(CartStatus.fetched);
     notifyListeners();
   }
 
   addToCart(int categoryId, int brandId, int productId) async {
-    setStatus(CartStatus.fetching);
+    setCartStatus(CartStatus.fetching);
     notifyListeners();
     try {
       final response = await _postService.post(
@@ -204,13 +202,13 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.shout(error.toString());
     }
-    setStatus(CartStatus.fetched);
+    setCartStatus(CartStatus.fetched);
     notifyListeners();
   }
 
   updateCart(int index, int cartId, int quantity, int categoryId, int brandId,
       int productId) async {
-    setStatus(CartStatus.fetching);
+    setCartStatus(CartStatus.fetching);
     notifyListeners();
     try {
       final response = await _putService.put(
@@ -232,12 +230,12 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.shout(error.toString());
     }
-    setStatus(CartStatus.fetched);
+    setCartStatus(CartStatus.fetched);
     notifyListeners();
   }
 
   removeItemFromCart(int cartId) async {
-    setStatus(CartStatus.fetching);
+    setCartStatus(CartStatus.fetching);
     notifyListeners();
     try {
       final response =
@@ -248,7 +246,32 @@ class UserDetailProvider extends ChangeNotifier {
     } catch (error) {
       logger.shout(error.toString());
     }
-    setStatus(CartStatus.fetched);
+    setCartStatus(CartStatus.fetched);
+    notifyListeners();
+  }
+
+  //*** Cart Item Controllers  ****/
+
+  Map<int, CartItemStatus> cartItemStatus = {};
+  Map<int, CartItemModel> cartItems = {};
+
+  setCartItemStatus(int productId, CartItemStatus updated) {
+    cartItemStatus[productId] = updated;
+  }
+
+  getCartItem(int categoryId, int brandId, int productId) async {
+    setCartItemStatus(productId, CartItemStatus.fetching);
+    try {
+      final response = await _getService.get(
+          endUrl: 'cart/get-cart-item/$categoryId/$brandId/$productId');
+      if (response.statusCode == 200) {
+        CartItemModel cartItem = cartItemModelFromMap(response.body.toString());
+        cartItems[productId] = cartItem;
+      }
+    } catch (error) {
+      logger.shout(error.toString());
+    }
+    setCartItemStatus(productId, CartItemStatus.fetched);
     notifyListeners();
   }
 }
