@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/models/MobileModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
+import 'package:shopybee/uitls/enums.dart';
 
 class MobileDetailBottomSheetCart extends StatelessWidget {
   final MobileModel mobile;

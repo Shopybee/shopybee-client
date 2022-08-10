@@ -5,6 +5,7 @@ import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/custom_icons/appbar_icons.dart';
 import 'package:shopybee/uitls/custom_methods.dart';
 import 'package:shopybee/uitls/device_size.dart';
+import 'package:shopybee/uitls/enums.dart';
 import 'package:shopybee/view/Screens/AppScreen/components/search_box.dart';
 import 'package:shopybee/view/ui_blocks/address_book_modal_sheet.dart';
 
