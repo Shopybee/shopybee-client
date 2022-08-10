@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
 import 'package:shopybee/uitls/device_size.dart';
+import 'package:shopybee/uitls/enums.dart';
+import 'package:shopybee/view/Screens/CartScreen/components/cart_list.dart';
 import 'package:shopybee/view/Screens/CartScreen/components/empty_cart_box.dart';
-import 'package:shopybee/view/ui_blocks/body_with_appbar.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -34,13 +35,13 @@ class CartScreen extends StatelessWidget {
           switch (controller.cartStatus) {
             case CartStatus.fetched:
               if (controller.cart.isEmpty) {
-                return EmpyCartBox();
+                return const EmpyCartBox();
               } else {
-                return Text("Not empty");
+                return const CartList();
               }
 
             case CartStatus.notFetched:
-              return Text('Tap to fetch');
+              return const Text('Tap to fetch');
             case CartStatus.fetching:
               return const Center(child: CircularProgressIndicator());
           }
