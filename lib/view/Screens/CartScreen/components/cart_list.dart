@@ -123,6 +123,7 @@ class CartList extends StatelessWidget {
                                   Text(
                                     item.quantity.toString(),
                                     style: const TextStyle(
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(width: 4),
