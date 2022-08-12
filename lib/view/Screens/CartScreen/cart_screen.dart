@@ -17,10 +17,6 @@ class CartScreen extends StatelessWidget {
         toolbarHeight: displayHeight(context) * 0.065,
         elevation: 0,
         centerTitle: true,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15))),
         title: const Text(
           "My Cart",
           style: TextStyle(fontSize: 16),
