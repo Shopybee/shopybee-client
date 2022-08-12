@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/constants/constants.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
@@ -6,7 +7,8 @@ import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/uitls/enums.dart';
 
 class PriceCartBottomSheet extends StatelessWidget {
-  const PriceCartBottomSheet({Key? key}) : super(key: key);
+  // const PriceCartBottomSheet({Key? key}) : super(key: key);
+  Logger _logger = Logger("PriceCartBottomSheet");
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,10 @@ class PriceCartBottomSheet extends StatelessWidget {
                     SizedBox(
                       width: displayWidth(context) * 0.4,
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _logger.info("Going to Order Screen");
+                          Navigator.pushNamed(context, '/order');
+                        },
                         color: primaryColor,
                         child: const Text(
                           "Place Order",
