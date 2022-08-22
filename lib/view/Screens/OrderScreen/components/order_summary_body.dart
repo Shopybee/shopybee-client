@@ -29,7 +29,7 @@ class OrderSummaryBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Consumer<OrderScreenController>(
+                    Consumer<OrderController>(
                       builder: (context, controller, child) {
                         return InkWell(
                             onTap: () {

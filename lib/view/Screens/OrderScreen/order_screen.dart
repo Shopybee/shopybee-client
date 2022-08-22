@@ -17,16 +17,13 @@ class OrderScreen extends StatelessWidget {
       appBar: AppBar(
           elevation: 0,
           backgroundColor: primaryColor,
-          title: Consumer<OrderScreenController>(
+          title: Consumer<OrderController>(
             builder: (context, controller, child) {
               switch (controller.navigationStatus) {
                 case OrderScreenNavigationStatus.address:
                   return const Text("Select Delivery Address");
                 case OrderScreenNavigationStatus.summary:
                   return const Text("Order Summary");
-
-                case OrderScreenNavigationStatus.payment:
-                  return const Text("Payment");
               }
             },
           )),
@@ -36,15 +33,13 @@ class OrderScreen extends StatelessWidget {
         children: [
           const OrderScreenStatusTopbar(),
           const SizedBox(height: 10),
-          Expanded(child: Consumer<OrderScreenController>(
+          Expanded(child: Consumer<OrderController>(
             builder: (context, controller, child) {
               switch (controller.navigationStatus) {
                 case OrderScreenNavigationStatus.address:
                   return SelectAddressBody();
                 case OrderScreenNavigationStatus.summary:
                   return OrderSummaryBody();
-                case OrderScreenNavigationStatus.payment:
-                  return SelectAddressBody();
               }
             },
           )),
