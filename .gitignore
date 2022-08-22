@@ -35,6 +35,7 @@ migrate_working_dir/
 # Web related
 lib/generated_plugin_registrant.dart
 android/app/google-services.json
+lib/constants/secrets.dart
 
 # Symbolication related
 app.*.symbols
