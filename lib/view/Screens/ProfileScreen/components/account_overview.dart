@@ -83,7 +83,7 @@ class AccountOverViewBox extends StatelessWidget {
               color: Colors.yellow[600],
             ),
             callback: () {
-              logger.fine('Orders');
+              Navigator.pushNamed(context, '/myOrders');
             },
             label: "My Orders"),
         overviewCard(
