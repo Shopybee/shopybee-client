@@ -18,7 +18,7 @@ class OrderScreenStatusTopbar extends StatelessWidget {
         width: displayWidth(context),
         padding: const EdgeInsets.symmetric(horizontal: 25),
         color: Colors.white,
-        child: Consumer<OrderScreenController>(
+        child: Consumer<OrderController>(
           builder: (context, controller, child) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -70,10 +70,7 @@ class OrderScreenStatusTopbar extends StatelessWidget {
                       Container(
                         width: 25,
                         decoration: BoxDecoration(
-                            color: controller.navigationStatus ==
-                                    OrderScreenNavigationStatus.payment
-                                ? primaryColor
-                                : Colors.transparent,
+                            color: Colors.transparent,
                             shape: BoxShape.circle,
                             border:
                                 Border.all(color: primaryColor, width: 1.8)),

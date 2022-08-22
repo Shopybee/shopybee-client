@@ -26,6 +26,7 @@ import 'package:shopybee/view/Screens/AuthScreen/auth_screen.dart';
 import 'package:shopybee/view/Screens/EditProfileScreen/edit_profile_screen.dart';
 import 'package:shopybee/view/Screens/LoginScreen/login_screen.dart';
 import 'package:shopybee/view/Screens/MobileCategoryScreen/mobile_category_screen.dart';
+import 'package:shopybee/view/Screens/MyOrdersScreen/my_order_screen.dart';
 import 'package:shopybee/view/Screens/OrderScreen/order_screen.dart';
 import 'package:shopybee/view/Screens/RegisterScreen/register_screen.dart';
 import 'package:shopybee/view/Screens/SplashScreen/splash_screen.dart';
@@ -65,7 +66,7 @@ class ShopyBeeApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => RegisterScreenController(),
         ),
-        ChangeNotifierProvider(create: (context) => OrderScreenController(),),
+        ChangeNotifierProvider(create: (context) => OrderController(),),
 
         //****** Data controllers *******//
         ChangeNotifierProvider(
@@ -93,6 +94,7 @@ class ShopyBeeApp extends StatelessWidget {
             '/mobileCategory': (context) => MobileCategoryScreen(),
             '/editProfile': (context) => EditProfileScreen(),
             '/order':(context) => OrderScreen(),
+            '/myOrders':(context) => MyOrdersScreen(),
           },
           debugShowCheckedModeBanner: false,
           navigatorKey: GlobalContext.contextKey,
