@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopybee/controllers/app_screen_controller.dart';
 import 'package:shopybee/uitls/device_size.dart';
 
 class SuccessfulOrderScreen extends StatelessWidget {
@@ -23,18 +25,6 @@ class SuccessfulOrderScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: displayHeight(context) * 0.1,
                   ),

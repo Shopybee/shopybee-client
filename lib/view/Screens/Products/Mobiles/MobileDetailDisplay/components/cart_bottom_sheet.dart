@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:shopybee/controllers/user_detail_provider.dart';
+import 'package:shopybee/models/CartItemModel.dart';
 import 'package:shopybee/models/MobileModel.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/uitls/enums.dart';
@@ -43,6 +44,13 @@ class MobileDetailBottomSheetCart extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
+                          controller.cartItems[mobile.productId] =
+                              CartItemModel(
+                                  productId: mobile.productId,
+                                  name: mobile.name,
+                                  mainImage: mobile.mainImage,
+                                  price: mobile.price,
+                                  discount: mobile.discount);
                           if (controller.cart[cartIndex].quantity > 1) {
                             controller.updateCart(
                               cartIndex,

@@ -12,7 +12,6 @@ import 'package:shopybee/models/OrderModel.dart';
 import 'package:shopybee/uitls/custom_methods.dart';
 import 'package:shopybee/uitls/device_size.dart';
 import 'package:shopybee/uitls/enums.dart';
-import 'package:http/http.dart' as http;
 import 'package:shopybee/view/Screens/OrderScreen/successfull_order_screen.dart';
 
 import '../../../../constants/secrets.dart';
@@ -63,9 +62,14 @@ class _BottomSheetOrderScreenState extends State<BottomSheetOrderScreen> {
     }
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     final userDetailProvider =
         Provider.of<UserDetailProvider>(context, listen: false);
+
+    final orderController =
+        Provider.of<OrderController>(context, listen: false);
+
+    final navigator = Navigator.of(context);
     final cartList = userDetailProvider.cart;
     final cartItems = userDetailProvider.cartItems;
     final userId = userDetailProvider.user!.id;
@@ -90,7 +94,15 @@ class _BottomSheetOrderScreenState extends State<BottomSheetOrderScreen> {
     double priceToPay =
         (originalPrice + deliveryCharge) - (discount + coinsUsed);
 
-    Provider.of<OrderController>(context, listen: false).createNewOrder(
+    // Check if order list is already fetched or not :
+
+    // If not fetched then try fetching
+
+    if (orderController.creatingOrderStatus == CreatingOrderStatus.notFetched) {
+      await orderController.getOrdersUsingUserId(userId!);
+    }
+
+    await orderController.createNewOrder(
         orderId: response.orderId!,
         paymentId: response.paymentId!,
         orderDate: DateTime.now(),
@@ -99,11 +111,10 @@ class _BottomSheetOrderScreenState extends State<BottomSheetOrderScreen> {
         orderStatus: 0,
         orderStatusMessage: "Order placed",
         orderItemList: items);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SuccessfulOrderScreen(),
-        ));
+    await userDetailProvider.removeAllFromCart();
+    navigator.pushReplacement(MaterialPageRoute(
+      builder: (context) => SuccessfulOrderScreen(),
+    ));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

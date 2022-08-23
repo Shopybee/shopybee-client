@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 import 'package:logging/logging.dart';
 import 'package:shopybee/models/AddressModel.dart';
 import 'package:shopybee/models/CartItemModel.dart';
@@ -247,6 +248,20 @@ class UserDetailProvider extends ChangeNotifier {
       logger.shout(error.toString());
     }
     setCartStatus(CartStatus.fetched);
+    notifyListeners();
+  }
+
+  removeAllFromCart() async {
+    try {
+      final Response response = await _deleteService.delete(
+          endUrl: 'cart/remove-all-from-cart/${user!.id}');
+      if (response.statusCode == 200) {
+        cart.clear();
+        cartItems.clear();
+      }
+    } catch (error) {
+      logger.shout(error);
+    }
     notifyListeners();
   }
 
